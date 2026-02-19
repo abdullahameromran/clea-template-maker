@@ -6,6 +6,7 @@ import { Search, FileText, Zap, Download } from "lucide-react";
 
 const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate"];
 
+// Invoice template gallery page
 const Index = () => {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
