@@ -1029,4 +1029,566 @@ export const invoiceTemplates: InvoiceTemplate[] = [
 </body>
 </html>`,
   },
+  {
+    id: "logo-clean-white",
+    name: "Logo Clean White",
+    description: "Bright white layout with a prominent company logo area and clean lines",
+    category: "Minimal",
+    tags: ["logo", "minimal", "clean", "white", "branding"],
+    primaryColor: "#2563eb",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111827; background: #fff; padding: 48px; }
+  .invoice { max-width: 760px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 2px solid #e5e7eb; }
+  .logo-wrap { display: flex; align-items: center; gap: 16px; }
+  .logo-svg { width: 60px; height: 60px; flex-shrink: 0; }
+  .company-name { font-size: 22px; font-weight: 800; color: #111827; letter-spacing: -0.5px; }
+  .company-sub { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .invoice-badge { text-align: right; }
+  .invoice-badge h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #2563eb; }
+  .invoice-badge .num { font-size: 28px; font-weight: 800; color: #111827; margin-top: 4px; }
+  .invoice-badge .date { font-size: 13px; color: #6b7280; margin-top: 4px; }
+  .address-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .addr .lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #2563eb; margin-bottom: 8px; }
+  .addr .name { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+  .addr .info { font-size: 13px; color: #6b7280; line-height: 1.7; }
+  .meta-strip { display: flex; gap: 0; border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin-bottom: 40px; }
+  .meta-item { flex: 1; padding: 14px 18px; border-right: 1px solid #e5e7eb; }
+  .meta-item:last-child { border-right: none; }
+  .meta-item .ml { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #9ca3af; margin-bottom: 4px; }
+  .meta-item .mv { font-size: 14px; font-weight: 700; color: #111827; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  thead th { padding: 11px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #fff; background: #2563eb; }
+  thead th:last-child { text-align: right; }
+  tbody td { padding: 14px; font-size: 14px; color: #374151; border-bottom: 1px solid #f3f4f6; }
+  tbody td:last-child { text-align: right; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #f9fafb; }
+  .totals { display: flex; justify-content: flex-end; margin-bottom: 40px; }
+  .totals-box { width: 260px; }
+  .trow { display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; padding: 7px 0; border-bottom: 1px solid #f3f4f6; }
+  .trow.final { border: none; font-size: 18px; font-weight: 800; color: #111827; padding-top: 14px; }
+  .trow.final span:last-child { color: #2563eb; }
+  .footer-note { text-align: center; font-size: 12px; color: #9ca3af; padding-top: 24px; border-top: 1px solid #f3f4f6; }
+</style>
+</head>
+<body>
+<div class="invoice">
+  <div class="header">
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="60" height="60" rx="14" fill="#2563eb"/>
+        <rect x="12" y="18" width="36" height="5" rx="2.5" fill="white"/>
+        <rect x="12" y="28" width="24" height="5" rx="2.5" fill="white" opacity="0.7"/>
+        <rect x="12" y="38" width="30" height="5" rx="2.5" fill="white" opacity="0.5"/>
+      </svg>
+      <div>
+        <div class="company-name">BluePeak Agency</div>
+        <div class="company-sub">Creative &amp; Digital Services</div>
+      </div>
+    </div>
+    <div class="invoice-badge">
+      <div class="date" style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#2563eb;font-weight:700">Invoice</div>
+      <div class="num">#BP-2024-055</div>
+      <div class="date">Due: April 15, 2024</div>
+    </div>
+  </div>
+  <div class="meta-strip">
+    <div class="meta-item"><div class="ml">Issued</div><div class="mv">Mar 16, 2024</div></div>
+    <div class="meta-item"><div class="ml">Due</div><div class="mv">Apr 15, 2024</div></div>
+    <div class="meta-item"><div class="ml">Terms</div><div class="mv">Net 30</div></div>
+    <div class="meta-item"><div class="ml">Currency</div><div class="mv">USD</div></div>
+  </div>
+  <div class="address-row">
+    <div class="addr">
+      <div class="lbl">From</div>
+      <div class="name">BluePeak Agency LLC</div>
+      <div class="info">88 Creative Quarter<br>Portland, OR 97209<br>billing@bluepeak.io</div>
+    </div>
+    <div class="addr">
+      <div class="lbl">Bill To</div>
+      <div class="name">Horizon Retail Group</div>
+      <div class="info">404 Commerce Blvd<br>Seattle, WA 98101<br>ap@horizonretail.com</div>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>Description</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Brand Strategy &amp; Positioning</td><td>1</td><td>$4,500</td><td>$4,500.00</td></tr>
+      <tr><td>Logo &amp; Visual Identity Design</td><td>1</td><td>$3,200</td><td>$3,200.00</td></tr>
+      <tr><td>Website Redesign (5 pages)</td><td>1</td><td>$6,800</td><td>$6,800.00</td></tr>
+      <tr><td>Social Media Kit (12 templates)</td><td>1</td><td>$1,400</td><td>$1,400.00</td></tr>
+    </tbody>
+  </table>
+  <div class="totals">
+    <div class="totals-box">
+      <div class="trow"><span>Subtotal</span><span>$15,900.00</span></div>
+      <div class="trow"><span>Tax (9%)</span><span>$1,431.00</span></div>
+      <div class="trow final"><span>Total Due</span><span>$17,331.00</span></div>
+    </div>
+  </div>
+  <div class="footer-note">BluePeak Agency LLC · EIN 93-1234567 · Bank: Chase · Routing 021000021 · Acct 4567890123<br>Thank you for your business! Questions? billing@bluepeak.io</div>
+</div>
+</body>
+</html>`,
+  },
+  {
+    id: "logo-dark-corporate",
+    name: "Logo Dark Corporate",
+    description: "Dark header with full-color SVG logo, ideal for enterprise brands",
+    category: "Corporate",
+    tags: ["logo", "corporate", "dark", "enterprise", "branding"],
+    primaryColor: "#0f172a",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Trebuchet MS', Arial, sans-serif; color: #1e293b; background: #f8fafc; }
+  .invoice { max-width: 800px; margin: 0 auto; background: #fff; box-shadow: 0 4px 32px rgba(0,0,0,0.10); }
+  .header { background: #0f172a; padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .logo-block { display: flex; align-items: center; gap: 18px; }
+  .logo-svg { width: 56px; height: 56px; flex-shrink: 0; }
+  .company-text .cname { font-size: 22px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.5px; }
+  .company-text .ctag { font-size: 11px; color: #64748b; letter-spacing: 1px; margin-top: 3px; text-transform: uppercase; }
+  .inv-right { text-align: right; }
+  .inv-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2.5px; color: #475569; margin-bottom: 6px; }
+  .inv-number { font-size: 24px; font-weight: 900; color: #38bdf8; }
+  .inv-date { font-size: 12px; color: #64748b; margin-top: 4px; }
+  .accent-line { height: 4px; background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #fb7185 100%); }
+  .body { padding: 40px 48px; }
+  .info-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin-bottom: 40px; }
+  .ig-item { padding: 14px 16px; border-right: 1px solid #e2e8f0; }
+  .ig-item:last-child { border-right: none; }
+  .ig-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 4px; }
+  .ig-value { font-size: 13px; font-weight: 700; color: #1e293b; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .party .pl { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #38bdf8; font-weight: 700; margin-bottom: 10px; }
+  .party .pn { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .party .pi { font-size: 13px; color: #64748b; line-height: 1.7; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  thead tr { background: #0f172a; }
+  thead th { padding: 13px 16px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; }
+  thead th:last-child { text-align: right; }
+  tbody td { padding: 14px 16px; font-size: 14px; color: #334155; border-bottom: 1px solid #f1f5f9; }
+  tbody td:last-child { text-align: right; font-weight: 700; color: #0f172a; }
+  tbody tr:hover td { background: #f8fafc; }
+  .totals-row-wrap { display: flex; justify-content: flex-end; margin-bottom: 40px; }
+  .totals-inner { width: 280px; }
+  .tr { display: flex; justify-content: space-between; font-size: 14px; padding: 8px 0; color: #64748b; border-bottom: 1px solid #f1f5f9; }
+  .tr.grand { font-size: 20px; font-weight: 900; color: #0f172a; border: none; padding-top: 16px; }
+  .tr.grand span:last-child { color: #38bdf8; }
+  .payment-note { background: #f0f9ff; border-left: 4px solid #38bdf8; padding: 16px 20px; border-radius: 0 8px 8px 0; font-size: 13px; color: #475569; line-height: 1.6; }
+  .footer { display: flex; justify-content: space-between; padding: 16px 48px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; }
+</style>
+</head>
+<body>
+<div class="invoice">
+  <div class="header">
+    <div class="logo-block">
+      <svg class="logo-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="56" height="56" rx="12" fill="#1e293b"/>
+        <polygon points="28,10 48,44 8,44" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round"/>
+        <circle cx="28" cy="30" r="6" fill="#38bdf8"/>
+        <line x1="28" y1="10" x2="28" y2="24" stroke="#38bdf8" stroke-width="2.5"/>
+      </svg>
+      <div class="company-text">
+        <div class="cname">Vantage Corp</div>
+        <div class="ctag">Global Enterprise Solutions</div>
+      </div>
+    </div>
+    <div class="inv-right">
+      <div class="inv-label">Tax Invoice</div>
+      <div class="inv-number">#VTG-2024-0301</div>
+      <div class="inv-date">Issued March 1, 2024</div>
+    </div>
+  </div>
+  <div class="accent-line"></div>
+  <div class="body">
+    <div class="info-grid">
+      <div class="ig-item"><div class="ig-label">Issue Date</div><div class="ig-value">Mar 1, 2024</div></div>
+      <div class="ig-item"><div class="ig-label">Due Date</div><div class="ig-value">Mar 31, 2024</div></div>
+      <div class="ig-item"><div class="ig-label">Payment Terms</div><div class="ig-value">Net 30</div></div>
+      <div class="ig-item"><div class="ig-label">Currency</div><div class="ig-value">USD</div></div>
+    </div>
+    <div class="parties">
+      <div class="party">
+        <div class="pl">Issued By</div>
+        <div class="pn">Vantage Corp Inc.</div>
+        <div class="pi">1200 Enterprise Pkwy<br>Dallas, TX 75201<br>EIN: 82-4567890<br>billing@vantagecorp.com</div>
+      </div>
+      <div class="party">
+        <div class="pl">Billed To</div>
+        <div class="pn">Apex Industries Ltd.</div>
+        <div class="pi">8800 Industry Blvd<br>Houston, TX 77001<br>PO#: AX-2024-881<br>accounts@apexind.com</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>#</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>Enterprise Software License (Annual)</td><td>3</td><td>$8,000</td><td>$24,000.00</td></tr>
+        <tr><td>02</td><td>Cloud Infrastructure Setup</td><td>1</td><td>$5,500</td><td>$5,500.00</td></tr>
+        <tr><td>03</td><td>Technical Consulting (80 hrs)</td><td>80</td><td>$220</td><td>$17,600.00</td></tr>
+        <tr><td>04</td><td>Staff Training Programme (3 days)</td><td>3</td><td>$2,000</td><td>$6,000.00</td></tr>
+        <tr><td>05</td><td>Annual Maintenance &amp; Support</td><td>1</td><td>$4,800</td><td>$4,800.00</td></tr>
+      </tbody>
+    </table>
+    <div class="totals-row-wrap">
+      <div class="totals-inner">
+        <div class="tr"><span>Subtotal</span><span>$57,900.00</span></div>
+        <div class="tr"><span>Discount (5%)</span><span>−$2,895.00</span></div>
+        <div class="tr"><span>Tax (8%)</span><span>$4,400.40</span></div>
+        <div class="tr grand"><span>Total Due</span><span>$59,405.40</span></div>
+      </div>
+    </div>
+    <div class="payment-note">Wire Transfer: Wells Fargo · Routing 121000248 · Account 9876543210 · SWIFT: WFBIUS6S<br>Please reference invoice #VTG-2024-0301 on all payments.</div>
+  </div>
+  <div class="footer"><span>Vantage Corp Inc. · Confidential Document</span><span>Page 1 of 1</span></div>
+</div>
+</body>
+</html>`,
+  },
+  {
+    id: "logo-luxury-gold",
+    name: "Logo Luxury Gold",
+    description: "Opulent design with SVG monogram logo, gold foil details and premium typography",
+    category: "Luxury",
+    tags: ["logo", "luxury", "gold", "monogram", "premium"],
+    primaryColor: "#c9a227",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; color: #1c1208; background: #f9f6ef; }
+  .invoice { max-width: 780px; margin: 0 auto; background: #fff; }
+  .header { background: #1c1208; padding: 48px 56px; display: flex; justify-content: space-between; align-items: center; }
+  .logo-mark { display: flex; align-items: center; gap: 20px; }
+  .monogram-svg { width: 70px; height: 70px; flex-shrink: 0; }
+  .brand-text .bname { font-size: 26px; letter-spacing: 6px; text-transform: uppercase; color: #c9a227; font-weight: normal; }
+  .brand-text .btag { font-size: 9px; letter-spacing: 4px; color: #6b5a35; text-transform: uppercase; margin-top: 6px; }
+  .inv-ref { text-align: right; }
+  .inv-ref .ref-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #6b5a35; margin-bottom: 8px; }
+  .inv-ref .ref-num { font-size: 16px; letter-spacing: 3px; color: #c9a227; }
+  .gold-rule { height: 1px; background: linear-gradient(90deg, transparent, #c9a227, #e8c96b, #c9a227, transparent); }
+  .body { padding: 52px 56px; }
+  .date-row { display: flex; gap: 48px; margin-bottom: 48px; }
+  .date-item .di-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: #c9a227; margin-bottom: 6px; }
+  .date-item .di-value { font-size: 14px; color: #1c1208; font-weight: bold; letter-spacing: 0.5px; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 52px; }
+  .party .plabel { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: #c9a227; margin-bottom: 12px; }
+  .party .pname { font-size: 18px; color: #1c1208; margin-bottom: 8px; font-style: italic; }
+  .party .pinfo { font-size: 12px; color: #7a6843; line-height: 1.8; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+  thead th { padding: 14px 0; font-size: 8px; text-transform: uppercase; letter-spacing: 3px; color: #c9a227; text-align: left; border-bottom: 1px solid #c9a227; }
+  thead th:last-child { text-align: right; }
+  tbody td { padding: 18px 0; font-size: 14px; color: #1c1208; border-bottom: 1px solid #f0ebe0; }
+  tbody td:last-child { text-align: right; color: #1c1208; font-weight: bold; }
+  .total-area { display: flex; justify-content: flex-end; margin-bottom: 48px; }
+  .total-inner { width: 280px; }
+  .tr { display: flex; justify-content: space-between; font-size: 13px; color: #7a6843; padding: 7px 0; border-bottom: 1px solid #f0ebe0; }
+  .tr.final { font-size: 20px; color: #1c1208; font-weight: bold; border: none; padding-top: 16px; margin-top: 4px; border-top: 1px solid #c9a227; }
+  .tr.final span:last-child { color: #c9a227; }
+  .closing { text-align: center; font-size: 12px; color: #7a6843; font-style: italic; padding: 32px 0; border-top: 1px solid #f0ebe0; letter-spacing: 0.5px; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="invoice">
+  <div class="header">
+    <div class="logo-mark">
+      <svg class="monogram-svg" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="70" height="70" rx="4" fill="none" stroke="#c9a227" stroke-width="1.5"/>
+        <rect x="4" y="4" width="62" height="62" rx="2" fill="none" stroke="#c9a227" stroke-width="0.5" opacity="0.4"/>
+        <text x="35" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="34" fill="#c9a227" font-style="italic">M</text>
+        <line x1="16" y1="58" x2="54" y2="58" stroke="#c9a227" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <div class="brand-text">
+        <div class="bname">Maison</div>
+        <div class="btag">Atelier de Luxe · Paris</div>
+      </div>
+    </div>
+    <div class="inv-ref">
+      <div class="ref-label">Facture / Invoice</div>
+      <div class="ref-num">MSN — 2024 — 041</div>
+    </div>
+  </div>
+  <div class="gold-rule"></div>
+  <div class="body">
+    <div class="date-row">
+      <div class="date-item"><div class="di-label">Date d'émission</div><div class="di-value">1 Mars 2024</div></div>
+      <div class="date-item"><div class="di-label">Date d'échéance</div><div class="di-value">1 Avril 2024</div></div>
+    </div>
+    <div class="parties">
+      <div class="party">
+        <div class="plabel">De la part de</div>
+        <div class="pname">Maison Atelier de Luxe</div>
+        <div class="pinfo">14 Rue du Faubourg Saint-Honoré<br>75008 Paris, France<br>TVA: FR 12 345678901<br>facturation@maison-atelier.fr</div>
+      </div>
+      <div class="party">
+        <div class="plabel">À l'attention de</div>
+        <div class="pname">The Meridian Collection</div>
+        <div class="pinfo">32 Old Bond Street<br>London, W1S 4PD<br>United Kingdom<br>accounts@meridiancollection.co.uk</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Service / Prestation</th><th>Qté</th><th>Prix unitaire</th><th>Montant HT</th></tr></thead>
+      <tbody>
+        <tr><td>Couture sur Mesure — Collection Printemps</td><td>3</td><td>€4,800</td><td>€14,400.00</td></tr>
+        <tr><td>Accessoires Signature (Pochette, Ceinture)</td><td>5</td><td>€1,200</td><td>€6,000.00</td></tr>
+        <tr><td>Consultation Stylisme Privée (4 séances)</td><td>4</td><td>€650</td><td>€2,600.00</td></tr>
+        <tr><td>Emballage Prestige &amp; Expédition Assurée</td><td>1</td><td>€480</td><td>€480.00</td></tr>
+      </tbody>
+    </table>
+    <div class="total-area">
+      <div class="total-inner">
+        <div class="tr"><span>Sous-total HT</span><span>€23,480.00</span></div>
+        <div class="tr"><span>TVA (20%)</span><span>€4,696.00</span></div>
+        <div class="tr final"><span>Total TTC</span><span>€28,176.00</span></div>
+      </div>
+    </div>
+    <div class="closing">« Nous vous remercions de votre confiance et de votre fidélité. »<br>Virement IBAN: FR76 3000 4000 0101 2345 6789 012 · BIC: BNPAFRPPXXX</div>
+  </div>
+</div>
+</body>
+</html>`,
+  },
+  {
+    id: "logo-modern-gradient",
+    name: "Logo Modern Gradient",
+    description: "Vivid gradient header with centered SVG logo mark for bold modern brands",
+    category: "Modern",
+    tags: ["logo", "modern", "gradient", "colorful", "bold"],
+    primaryColor: "#7c3aed",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1e1b4b; background: #f5f3ff; padding: 40px; }
+  .invoice { max-width: 760px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 48px rgba(124,58,237,0.15); }
+  .header { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%); padding: 44px 48px; text-align: center; position: relative; }
+  .logo-circle { width: 72px; height: 72px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .logo-circle svg { width: 40px; height: 40px; }
+  .brand-name { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+  .brand-tag { font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .inv-chip { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 6px 20px; font-size: 13px; font-weight: 700; color: white; margin-top: 18px; letter-spacing: 1px; }
+  .body { padding: 40px 48px; }
+  .meta-row { display: flex; gap: 0; background: #f5f3ff; border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+  .meta-cell { flex: 1; padding: 16px 20px; border-right: 1px solid #ede9fe; }
+  .meta-cell:last-child { border-right: none; }
+  .mc-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa; margin-bottom: 4px; }
+  .mc-value { font-size: 14px; font-weight: 700; color: #1e1b4b; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .party .pl { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #7c3aed; font-weight: 700; margin-bottom: 8px; }
+  .party .pn { font-size: 15px; font-weight: 800; color: #1e1b4b; margin-bottom: 4px; }
+  .party .pi { font-size: 13px; color: #6b7280; line-height: 1.7; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 32px; border-radius: 12px; overflow: hidden; }
+  thead tr { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  thead th { padding: 13px 16px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: white; }
+  thead th:last-child { text-align: right; }
+  tbody td { padding: 14px 16px; font-size: 14px; color: #374151; border-bottom: 1px solid #f5f3ff; }
+  tbody td:last-child { text-align: right; font-weight: 700; color: #1e1b4b; }
+  tbody tr:nth-child(even) { background: #faf9ff; }
+  .totals-wrap { display: flex; justify-content: flex-end; margin-bottom: 40px; }
+  .totals-box { width: 260px; background: #f5f3ff; border-radius: 12px; padding: 20px; }
+  .trow { display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; padding: 6px 0; }
+  .trow.grand { margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd6fe; font-size: 20px; font-weight: 900; color: #1e1b4b; }
+  .trow.grand span:last-child { background: linear-gradient(135deg, #7c3aed, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .footer { text-align: center; font-size: 12px; color: #9ca3af; padding: 24px 48px; border-top: 1px solid #f5f3ff; }
+</style>
+</head>
+<body>
+<div class="invoice">
+  <div class="header">
+    <div class="logo-circle">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4L36 32H4L20 4Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="20" cy="24" r="5" fill="white"/>
+      </svg>
+    </div>
+    <div class="brand-name">Prisma Studio</div>
+    <div class="brand-tag">Creative Technology Agency</div>
+    <div class="inv-chip">Invoice #PRM-2024-088</div>
+  </div>
+  <div class="body">
+    <div class="meta-row">
+      <div class="meta-cell"><div class="mc-label">Issued</div><div class="mc-value">Mar 1, 2024</div></div>
+      <div class="meta-cell"><div class="mc-label">Due</div><div class="mc-value">Apr 1, 2024</div></div>
+      <div class="meta-cell"><div class="mc-label">Terms</div><div class="mc-value">Net 30</div></div>
+      <div class="meta-cell"><div class="mc-label">Status</div><div class="mc-value" style="color:#7c3aed">● Pending</div></div>
+    </div>
+    <div class="parties">
+      <div class="party">
+        <div class="pl">From</div>
+        <div class="pn">Prisma Studio LLC</div>
+        <div class="pi">55 Pixel Lane, Studio 4<br>Los Angeles, CA 90028<br>hello@prismastudio.co</div>
+      </div>
+      <div class="party">
+        <div class="pl">Bill To</div>
+        <div class="pn">FutureBrand Inc.</div>
+        <div class="pi">202 Brand Avenue, Floor 9<br>New York, NY 10001<br>finance@futurebrand.com</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Service</th><th>Hours</th><th>Rate</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>UX Research &amp; User Testing</td><td>20</td><td>$140</td><td>$2,800.00</td></tr>
+        <tr><td>Product Design (Mobile App)</td><td>48</td><td>$135</td><td>$6,480.00</td></tr>
+        <tr><td>Motion Design &amp; Micro-animations</td><td>16</td><td>$150</td><td>$2,400.00</td></tr>
+        <tr><td>Design System Documentation</td><td>12</td><td>$120</td><td>$1,440.00</td></tr>
+        <tr><td>Handoff &amp; Developer Support</td><td>8</td><td>$125</td><td>$1,000.00</td></tr>
+      </tbody>
+    </table>
+    <div class="totals-wrap">
+      <div class="totals-box">
+        <div class="trow"><span>Subtotal</span><span>$14,120.00</span></div>
+        <div class="trow"><span>Tax (9.5%)</span><span>$1,341.40</span></div>
+        <div class="trow grand"><span>Total Due</span><span>$15,461.40</span></div>
+      </div>
+    </div>
+    <div class="footer">Prisma Studio LLC · EIN 85-1234567 · Wire: Bank of America · Routing 026009593 · Acct 1122334455<br>Thank you for collaborating with us ✦</div>
+  </div>
+</div>
+</body>
+</html>`,
+  },
+  {
+    id: "logo-creative-sidebar",
+    name: "Logo Creative Sidebar",
+    description: "Artistic sidebar layout with custom SVG icon logo for creative studios",
+    category: "Creative",
+    tags: ["logo", "creative", "sidebar", "artistic", "studio"],
+    primaryColor: "#f97316",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #fff; color: #18181b; }
+  .invoice { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 240px 1fr; min-height: 900px; }
+  .sidebar { background: #18181b; color: white; padding: 44px 32px; display: flex; flex-direction: column; }
+  .logo-area { margin-bottom: 40px; text-align: center; }
+  .logo-svg { width: 64px; height: 64px; margin: 0 auto 14px; display: block; }
+  .brand-name { font-size: 18px; font-weight: 900; color: #f97316; letter-spacing: -0.5px; }
+  .brand-tag { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: #52525b; margin-top: 4px; }
+  .divider { height: 1px; background: #27272a; margin: 24px 0; }
+  .sb-section { margin-bottom: 32px; }
+  .sb-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #f97316; margin-bottom: 12px; }
+  .sb-text { font-size: 12px; color: #a1a1aa; line-height: 1.8; }
+  .amount-box { background: #27272a; border-radius: 12px; padding: 20px; margin-top: auto; }
+  .ab-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #71717a; margin-bottom: 8px; }
+  .ab-value { font-size: 30px; font-weight: 900; color: #f97316; line-height: 1; }
+  .main { padding: 44px 40px; }
+  .main-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .inv-word { font-size: 44px; font-weight: 900; color: #18181b; letter-spacing: -2px; line-height: 1; }
+  .inv-word span { color: #f97316; }
+  .inv-meta { text-align: right; font-size: 12px; color: #a1a1aa; line-height: 1.7; }
+  .orange-bar { width: 48px; height: 4px; background: #f97316; border-radius: 2px; margin: 16px 0 28px; }
+  .client-info { margin-bottom: 32px; }
+  .ci-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #f97316; margin-bottom: 8px; }
+  .ci-name { font-size: 17px; font-weight: 800; color: #18181b; margin-bottom: 2px; }
+  .ci-sub { font-size: 13px; color: #71717a; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+  thead th { padding: 10px 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #a1a1aa; text-align: left; border-bottom: 2px solid #f4f4f5; }
+  thead th:last-child { text-align: right; }
+  tbody td { padding: 14px 0; font-size: 14px; color: #27272a; border-bottom: 1px solid #f4f4f5; }
+  tbody td:first-child { font-weight: 600; color: #18181b; }
+  tbody td:last-child { text-align: right; font-weight: 700; }
+  .summary { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; margin-bottom: 32px; }
+  .s-row { display: flex; justify-content: space-between; width: 200px; font-size: 13px; color: #71717a; }
+  .s-row.final { font-size: 16px; font-weight: 900; color: #18181b; width: 200px; padding-top: 10px; border-top: 2px solid #f97316; }
+  .s-row.final span:last-child { color: #f97316; }
+  .terms-note { font-size: 11px; color: #a1a1aa; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="invoice">
+  <div class="sidebar">
+    <div class="logo-area">
+      <svg class="logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="#f97316" stroke-width="2"/>
+        <circle cx="32" cy="32" r="12" fill="#f97316"/>
+        <line x1="32" y1="4" x2="32" y2="20" stroke="#f97316" stroke-width="2.5"/>
+        <line x1="32" y1="44" x2="32" y2="60" stroke="#f97316" stroke-width="2.5"/>
+        <line x1="4" y1="32" x2="20" y2="32" stroke="#f97316" stroke-width="2.5"/>
+        <line x1="44" y1="32" x2="60" y2="32" stroke="#f97316" stroke-width="2.5"/>
+        <line x1="12" y1="12" x2="22" y2="22" stroke="#f97316" stroke-width="2" opacity="0.5"/>
+        <line x1="42" y1="42" x2="52" y2="52" stroke="#f97316" stroke-width="2" opacity="0.5"/>
+      </svg>
+      <div class="brand-name">Solaris Works</div>
+      <div class="brand-tag">Motion &amp; Branding</div>
+    </div>
+    <div class="divider"></div>
+    <div class="sb-section">
+      <div class="sb-label">Studio Address</div>
+      <div class="sb-text">77 Loft District<br>Chicago, IL 60607<br><br>hello@solarisworks.co<br>+1 (312) 555-0181</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Invoice Date</div>
+      <div class="sb-text">March 1, 2024</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Payment Due</div>
+      <div class="sb-text">March 21, 2024</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Invoice No.</div>
+      <div class="sb-text">#SOL-2024-019</div>
+    </div>
+    <div class="amount-box">
+      <div class="ab-label">Total Amount Due</div>
+      <div class="ab-value">$11,820</div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-top">
+      <div>
+        <div class="inv-word">INV<span>.</span></div>
+        <div class="inv-word">#019</div>
+      </div>
+      <div class="inv-meta">
+        Solaris Works LLC<br>
+        Tax ID: 93-8765432<br>
+        Net 20 Days
+      </div>
+    </div>
+    <div class="orange-bar"></div>
+    <div class="client-info">
+      <div class="ci-label">Billed To</div>
+      <div class="ci-name">Momentum Creative Co.</div>
+      <div class="ci-sub">28 Studio Row, Los Angeles, CA 90038 · pay@momentumcreative.com</div>
+    </div>
+    <table>
+      <thead><tr><th>Project / Deliverable</th><th>Days</th><th>Day Rate</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>Animated Brand Identity (Logo)</td><td>4</td><td>$1,100</td><td>$4,400</td></tr>
+        <tr><td>Title Sequence (30 sec)</td><td>3</td><td>$1,200</td><td>$3,600</td></tr>
+        <tr><td>Social Motion Pack (6 clips)</td><td>2</td><td>$950</td><td>$1,900</td></tr>
+        <tr><td>Sound Design Supervision</td><td>1</td><td>$800</td><td>$800</td></tr>
+        <tr><td>Client Revisions (2 rounds included)</td><td>1</td><td>$600</td><td>$600</td></tr>
+      </tbody>
+    </table>
+    <div class="summary">
+      <div class="s-row"><span>Subtotal</span><span>$11,300</span></div>
+      <div class="s-row"><span>Tax (4.6%)</span><span>$520</span></div>
+      <div class="s-row final"><span>Total</span><span>$11,820</span></div>
+    </div>
+    <div class="terms-note">
+      Payment by ACH or wire transfer only.<br>
+      Chase Bank · Routing 071000013 · Account 5566778899<br>
+      Late payments subject to 2% monthly interest after due date.
+    </div>
+  </div>
+</div>
+</body>
+</html>`,
+  },
 ];
