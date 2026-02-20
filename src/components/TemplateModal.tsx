@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { InvoiceTemplate } from "@/data/invoiceTemplates";
-import { Copy, Check, X, Eye, Code } from "lucide-react";
+import { Copy, Check, X, Eye, Code, Download, Printer } from "lucide-react";
 
 interface TemplateModalProps {
   template: InvoiceTemplate;
@@ -19,6 +19,27 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
     navigator.clipboard.writeText(template.html);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([template.html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invoice-${template.id}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handlePrint = () => {
+    const printWindow = window.open("", "_blank");
+    if (printWindow) {
+      printWindow.document.write(template.html);
+      printWindow.document.close();
+      setTimeout(() => printWindow.print(), 500);
+    }
   };
 
   return (
@@ -58,6 +79,20 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
                 HTML Code
               </button>
             </div>
+            <button
+              onClick={handleDownload}
+              className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
+            >
+              <Download size={15} />
+              Download
+            </button>
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
+            >
+              <Printer size={15} />
+              Print/PDF
+            </button>
             <button
               onClick={handleCopy}
               className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-all"
