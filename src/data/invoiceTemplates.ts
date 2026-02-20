@@ -1592,3 +1592,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
 </html>`,
   },
 ];
+
+// Import and merge additional templates
+import { additionalTemplates } from "./newTemplates";
+invoiceTemplates.push(...additionalTemplates);

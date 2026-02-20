@@ -2,7 +2,8 @@ import heroBanner from "@/assets/hero-banner.jpg";
 import { useState, useMemo } from "react";
 import { invoiceTemplates } from "@/data/invoiceTemplates";
 import TemplateCard from "@/components/TemplateCard";
-import { Search, FileText, Zap, Download } from "lucide-react";
+import InvoiceEditor from "@/components/InvoiceEditor";
+import { Search, FileText, Zap, Download, Edit } from "lucide-react";
 
 const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate"];
 
@@ -38,6 +39,7 @@ const Index = () => {
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm text-white/70">
             <a href="#templates" className="hover:text-white transition-colors">Templates</a>
+            <a href="#editor" className="hover:text-white transition-colors">Editor</a>
             <a href="#features" className="hover:text-white transition-colors">Features</a>
           </div>
           <a
@@ -62,7 +64,7 @@ const Index = () => {
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
             <Zap size={14} className="text-gold" />
-            <span className="text-white/90">10 Professional Templates — 100% Free</span>
+            <span className="text-white/90">20+ Professional Templates — 100% Free</span>
           </div>
           <h1 className="font-display text-5xl md:text-6xl font-bold leading-tight mb-6">
             Beautiful Invoice
@@ -93,11 +95,12 @@ const Index = () => {
 
       {/* Features strip */}
       <section id="features" className="bg-card border-b border-border py-10 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
-            { icon: "🎨", title: "10 Unique Designs", desc: "From minimal to luxury — a style for every business" },
+            { icon: "🎨", title: "20+ Unique Designs", desc: "From minimal to luxury — a style for every industry" },
             { icon: "📋", title: "Copy HTML Instantly", desc: "One click to copy the full HTML code, ready to paste" },
-            { icon: "✏️", title: "Fully Customizable", desc: "Clean code structure makes editing straightforward" },
+            { icon: "✏️", title: "Fill & Customize", desc: "Add your company info and download personalized invoices" },
+            { icon: "📥", title: "Download & Print", desc: "Export as HTML or print to PDF directly from your browser" },
           ].map((f) => (
             <div key={f.title} className="flex items-start gap-4">
               <div className="text-2xl">{f.icon}</div>
@@ -172,6 +175,9 @@ const Index = () => {
           )}
         </div>
       </section>
+
+      {/* Invoice Editor */}
+      <InvoiceEditor />
 
       {/* Footer */}
       <footer className="bg-navy text-white/60 py-10 px-6 text-center text-sm">
