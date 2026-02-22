@@ -1,4 +1,4 @@
-import heroBanner from "@/assets/hero-banner.jpg";
+﻿import heroBanner from "@/assets/hero-banner.jpg";
 import { useState, useMemo } from "react";
 import { invoiceTemplates } from "@/data/invoiceTemplates";
 import TemplateCard from "@/components/TemplateCard";
@@ -64,7 +64,7 @@ const Index = () => {
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
             <Zap size={14} className="text-gold" />
-            <span className="text-white/90">20+ Professional Templates — 100% Free</span>
+            <span className="text-white/90">20+ Professional Templates â€” 100% Free</span>
           </div>
           <h1 className="font-display text-5xl md:text-6xl font-bold leading-tight mb-6">
             Beautiful Invoice
@@ -97,10 +97,10 @@ const Index = () => {
       <section id="features" className="bg-card border-b border-border py-10 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
-            { icon: "🎨", title: "20+ Unique Designs", desc: "From minimal to luxury — a style for every industry" },
-            { icon: "📋", title: "Copy HTML Instantly", desc: "One click to copy the full HTML code, ready to paste" },
-            { icon: "✏️", title: "Fill & Customize", desc: "Add your company info and download personalized invoices" },
-            { icon: "📥", title: "Download & Print", desc: "Export as HTML or print to PDF directly from your browser" },
+            { icon: "ðŸŽ¨", title: "20+ Unique Designs", desc: "From minimal to luxury â€” a style for every industry" },
+            { icon: "ðŸ“‹", title: "Copy HTML Instantly", desc: "One click to copy the full HTML code, ready to paste" },
+            { icon: "âœï¸", title: "Fill & Customize", desc: "Add your company info and download personalized invoices" },
+            { icon: "ðŸ“¥", title: "Download & Print", desc: "Export as HTML or print to PDF directly from your browser" },
           ].map((f) => (
             <div key={f.title} className="flex items-start gap-4">
               <div className="text-2xl">{f.icon}</div>
@@ -168,7 +168,7 @@ const Index = () => {
 
           {filtered.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">
-              <div className="text-4xl mb-4">🔍</div>
+              <div className="text-4xl mb-4">ðŸ”</div>
               <p className="font-semibold text-foreground">No templates found</p>
               <p className="text-sm mt-1">Try a different search term or category</p>
             </div>

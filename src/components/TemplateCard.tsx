@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { InvoiceTemplate } from "@/data/invoiceTemplates";
 import { Eye, Code, Copy, Check } from "lucide-react";
 import TemplateModal from "./TemplateModal";
@@ -18,6 +18,13 @@ const categoryColors: Record<string, string> = {
 const TemplateCard = ({ template }: TemplateCardProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const hasPassAccess = useMemo(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    const params = new URLSearchParams(window.location.search);
+    return params.get("pass") === "password";
+  }, []);
 
   const handleCopyHtml = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -62,25 +69,27 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
             sandbox="allow-same-origin"
           />
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/70 transition-all duration-300 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 mt-7">
-            <button
-              className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
-              onClick={(e) => {
-                e.stopPropagation();
-                setModalOpen(true);
-              }}
-            >
-              <Eye size={15} />
-              Preview
-            </button>
-            <button
-              className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
-              onClick={handleCopyHtml}
-            >
-              {copied ? <Check size={15} className="text-green-600" /> : <Code size={15} />}
-              {copied ? "Copied!" : "Copy HTML"}
-            </button>
-          </div>
+          {hasPassAccess && (
+            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/70 transition-all duration-300 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 mt-7">
+              <button
+                className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalOpen(true);
+                }}
+              >
+                <Eye size={15} />
+                Preview
+              </button>
+              <button
+                className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
+                onClick={handleCopyHtml}
+              >
+                {copied ? <Check size={15} className="text-green-600" /> : <Code size={15} />}
+                {copied ? "Copied!" : "Copy HTML"}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Card info */}
@@ -101,6 +110,27 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
               </span>
             ))}
           </div>
+          {hasPassAccess && (
+            <div className="mt-3 flex items-center gap-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalOpen(true);
+                }}
+                className="flex-1 flex items-center justify-center gap-2 bg-secondary text-foreground text-xs font-semibold px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors"
+              >
+                <Eye size={14} />
+                Preview
+              </button>
+              <button
+                onClick={handleCopyHtml}
+                className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-2 rounded-lg hover:bg-primary/90 transition-colors"
+              >
+                {copied ? <Check size={14} className="text-green-200" /> : <Code size={14} />}
+                {copied ? "Copied!" : "Copy HTML"}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Color accent bar */}
@@ -120,3 +150,4 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
 };
 
 export default TemplateCard;
+

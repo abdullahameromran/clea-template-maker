@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { InvoiceTemplate } from "@/data/invoiceTemplates";
 import { Copy, Check, X, Eye, Code, Download, Printer } from "lucide-react";
@@ -14,6 +14,13 @@ type Tab = "preview" | "html";
 const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("preview");
   const [copied, setCopied] = useState(false);
+  const hasPassAccess = useMemo(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    const params = new URLSearchParams(window.location.search);
+    return params.get("pass") === "password";
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(template.html);
@@ -46,64 +53,72 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
       <DialogContent className="max-w-5xl w-[95vw] h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-card shrink-0">
+        <div className="flex items-start justify-between gap-3 px-4 md:px-6 py-4 border-b border-border bg-card shrink-0">
           <div>
             <DialogTitle className="text-lg font-bold text-foreground font-display">
               {template.name}
             </DialogTitle>
             <p className="text-sm text-muted-foreground mt-0.5">{template.description}</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center flex-wrap justify-end gap-2">
             {/* Tabs */}
-            <div className="flex bg-muted rounded-lg p-1 gap-1 mr-2">
+            {hasPassAccess && (
+              <div className="flex bg-muted rounded-lg p-1 gap-1">
+                <button
+                  onClick={() => setActiveTab("preview")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                    activeTab === "preview"
+                      ? "bg-card text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Eye size={14} />
+                  Preview
+                </button>
+                <button
+                  onClick={() => setActiveTab("html")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                    activeTab === "html"
+                      ? "bg-card text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Code size={14} />
+                  HTML Code
+                </button>
+              </div>
+            )}
+            {hasPassAccess && (
+              <>
+                <button
+                  onClick={handleDownload}
+                  className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
+                >
+                  <Download size={15} />
+                  Download HTML
+                </button>
+                <button
+                  onClick={handlePrint}
+                  className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
+                >
+                  <Printer size={15} />
+                  Print/PDF
+                </button>
+              </>
+            )}
+            {hasPassAccess && (
               <button
-                onClick={() => setActiveTab("preview")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                  activeTab === "preview"
-                    ? "bg-card text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                onClick={handleCopy}
+                className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-all"
+                style={{
+                  background: copied ? "#dcfce7" : "hsl(var(--primary))",
+                  color: copied ? "#16a34a" : "hsl(var(--primary-foreground))",
+                }}
               >
-                <Eye size={14} />
-                Preview
+                {copied ? <Check size={15} /> : <Copy size={15} />}
+                {copied ? "Copied!" : "Copy HTML"}
               </button>
-              <button
-                onClick={() => setActiveTab("html")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                  activeTab === "html"
-                    ? "bg-card text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <Code size={14} />
-                HTML Code
-              </button>
-            </div>
-            <button
-              onClick={handleDownload}
-              className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
-            >
-              <Download size={15} />
-              Download
-            </button>
-            <button
-              onClick={handlePrint}
-              className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
-            >
-              <Printer size={15} />
-              Print/PDF
-            </button>
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-all"
-              style={{
-                background: copied ? "#dcfce7" : "hsl(var(--primary))",
-                color: copied ? "#16a34a" : "hsl(var(--primary-foreground))",
-              }}
-            >
-              {copied ? <Check size={15} /> : <Copy size={15} />}
-              {copied ? "Copied!" : "Copy HTML"}
-            </button>
+            )}
             <button
               onClick={onClose}
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -115,7 +130,7 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
 
         {/* Content */}
         <div className="flex-1 overflow-hidden">
-          {activeTab === "preview" ? (
+          {activeTab === "preview" || !hasPassAccess ? (
             <div className="w-full h-full bg-secondary/50 flex items-start justify-center overflow-auto p-6">
               <div className="bg-white rounded-lg overflow-hidden w-full max-w-4xl" style={{ boxShadow: "var(--shadow-xl)" }}>
                 <iframe
@@ -193,3 +208,5 @@ function escapeAndHighlight(line: string): string {
 }
 
 export default TemplateModal;
+
+

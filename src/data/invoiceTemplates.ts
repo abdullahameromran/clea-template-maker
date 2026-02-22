@@ -1,4 +1,4 @@
-export interface InvoiceTemplate {
+﻿export interface InvoiceTemplate {
   id: string;
   name: string;
   description: string;
@@ -148,7 +148,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="meta">
       <div class="meta-item"><div class="label">Issue Date</div><div class="value">March 1, 2024</div></div>
       <div class="meta-item"><div class="label">Due Date</div><div class="value">March 31, 2024</div></div>
-      <div class="meta-item"><div class="label">Status</div><div class="value" style="color:#f59e0b">● Pending</div></div>
+      <div class="meta-item"><div class="label">Status</div><div class="value" style="color:#f59e0b">â— Pending</div></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px;">
       <div>
@@ -175,13 +175,13 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="totals">
       <div class="totals-box">
         <div class="totals-row"><span>Subtotal</span><span>$5,960.00</span></div>
-        <div class="totals-row"><span>Discount (5%)</span><span>−$298.00</span></div>
+        <div class="totals-row"><span>Discount (5%)</span><span>âˆ’$298.00</span></div>
         <div class="totals-row"><span>Tax (10%)</span><span>$566.20</span></div>
         <div class="totals-row grand"><span>Grand Total</span><span>$6,228.20</span></div>
       </div>
     </div>
     <div class="footer">
-      <div class="payment-info">Bank Transfer · Routing: 021000021 · Acct: 1234567890</div>
+      <div class="payment-info">Bank Transfer Â· Routing: 021000021 Â· Acct: 1234567890</div>
       <div class="badge">Net 30</div>
     </div>
   </div>
@@ -261,17 +261,17 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <table>
       <thead><tr><th>Service</th><th>Description</th><th>Qty</th><th>Amount</th></tr></thead>
       <tbody>
-        <tr><td>Luxury Branding</td><td>Full visual identity system</td><td>1</td><td>£8,500.00</td></tr>
-        <tr><td>Photography</td><td>Professional product shoot (full day)</td><td>1</td><td>£2,200.00</td></tr>
-        <tr><td>Print Collateral</td><td>Business cards, stationery set</td><td>500</td><td>£1,450.00</td></tr>
-        <tr><td>Retouching</td><td>Post-production per image</td><td>20</td><td>£600.00</td></tr>
+        <tr><td>Luxury Branding</td><td>Full visual identity system</td><td>1</td><td>Â£8,500.00</td></tr>
+        <tr><td>Photography</td><td>Professional product shoot (full day)</td><td>1</td><td>Â£2,200.00</td></tr>
+        <tr><td>Print Collateral</td><td>Business cards, stationery set</td><td>500</td><td>Â£1,450.00</td></tr>
+        <tr><td>Retouching</td><td>Post-production per image</td><td>20</td><td>Â£600.00</td></tr>
       </tbody>
     </table>
     <div class="totals">
       <div class="totals-inner">
-        <div class="totals-row"><span>Subtotal</span><span>£12,750.00</span></div>
-        <div class="totals-row"><span>VAT (20%)</span><span>£2,550.00</span></div>
-        <div class="totals-row final"><span>Total Due</span><span>£15,300.00</span></div>
+        <div class="totals-row"><span>Subtotal</span><span>Â£12,750.00</span></div>
+        <div class="totals-row"><span>VAT (20%)</span><span>Â£2,550.00</span></div>
+        <div class="totals-row final"><span>Total Due</span><span>Â£15,300.00</span></div>
       </div>
     </div>
     <div class="footer-note">"We are grateful for your continued trust. Payment kindly requested within 30 days."</div>
@@ -354,12 +354,12 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="bill-box">
       <div class="section-header">From</div>
       <div class="bill-name">NexaCloud Inc.</div>
-      <div class="bill-addr">500 Tech Park Drive, Suite 800<br>Seattle, WA 98101<br>billing@nexacloud.io · +1 (206) 555-0100</div>
+      <div class="bill-addr">500 Tech Park Drive, Suite 800<br>Seattle, WA 98101<br>billing@nexacloud.io Â· +1 (206) 555-0100</div>
     </div>
     <div class="bill-box">
       <div class="section-header">Bill To</div>
       <div class="bill-name">DataFlow Systems LLC</div>
-      <div class="bill-addr">200 Enterprise Way<br>Chicago, IL 60601<br>accounts@dataflow.io · +1 (312) 555-0200</div>
+      <div class="bill-addr">200 Enterprise Way<br>Chicago, IL 60601<br>accounts@dataflow.io Â· +1 (312) 555-0200</div>
     </div>
   </div>
   <table>
@@ -383,7 +383,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       <div class="totals-row total"><span>Total Due</span><span>$1,944.32</span></div>
     </div>
   </div>
-  <div class="footer"><span>nexacloud.io · Privacy Policy · Terms</span><span>Thank you for your business 🚀</span></div>
+  <div class="footer"><span>nexacloud.io Â· Privacy Policy Â· Terms</span><span>Thank you for your business ðŸš€</span></div>
 </div>
 </body>
 </html>`,
@@ -475,7 +475,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       <div class="client-section">
         <div class="client-label">Billed To</div>
         <div class="client-name">Visionary Brands Ltd.</div>
-        <div class="client-detail">44 Advertising Row, Manhattan, NY 10019 · pay@visionary.com</div>
+        <div class="client-detail">44 Advertising Row, Manhattan, NY 10019 Â· pay@visionary.com</div>
       </div>
       <table>
         <thead><tr><th>Project / Service</th><th>Days</th><th>Rate</th><th>Total</th></tr></thead>
@@ -492,7 +492,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
         <div class="st-row"><span>Tax (3.8%)</span><span>$338</span></div>
         <div class="st-row final"><span>Total</span><span>$9,238</span></div>
       </div>
-      <div class="terms">Payment via wire transfer or check. Late payments incur 1.5% monthly interest. © 2024 Pixel &amp; Co.</div>
+      <div class="terms">Payment via wire transfer or check. Late payments incur 1.5% monthly interest. Â© 2024 Pixel &amp; Co.</div>
     </div>
   </div>
 </div>
@@ -548,7 +548,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
   <div class="header">
     <div class="company-info">
       <h1>GlobalTech Solutions</h1>
-      <p>Enterprise Software &amp; Consulting<br>1000 Corporate Center Dr · Chicago, IL 60601<br>invoices@globaltech.com · (312) 555-0300</p>
+      <p>Enterprise Software &amp; Consulting<br>1000 Corporate Center Dr Â· Chicago, IL 60601<br>invoices@globaltech.com Â· (312) 555-0300</p>
     </div>
     <div class="invoice-info">
       <div class="inv-word">Invoice</div>
@@ -579,7 +579,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       <thead><tr><th>#</th><th>Description of Services</th><th>Period</th><th>Units</th><th>Rate</th><th>Amount</th></tr></thead>
       <tbody>
         <tr><td>1</td><td>Enterprise License (Tier 3)</td><td>Q1 2024</td><td>1</td><td>$12,000</td><td>$12,000.00</td></tr>
-        <tr><td>2</td><td>Implementation Services</td><td>Feb–Mar</td><td>80 hrs</td><td>$200</td><td>$16,000.00</td></tr>
+        <tr><td>2</td><td>Implementation Services</td><td>Febâ€“Mar</td><td>80 hrs</td><td>$200</td><td>$16,000.00</td></tr>
         <tr><td>3</td><td>Data Migration</td><td>Feb 2024</td><td>1</td><td>$4,500</td><td>$4,500.00</td></tr>
         <tr><td>4</td><td>Training Workshops</td><td>Mar 2024</td><td>3 days</td><td>$1,800</td><td>$5,400.00</td></tr>
         <tr><td>5</td><td>Annual Support Contract</td><td>2024</td><td>1</td><td>$6,000</td><td>$6,000.00</td></tr>
@@ -593,10 +593,10 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     </table>
     <div class="payment">
       <h4>Payment Instructions</h4>
-      <p>Bank: First National Bank · ABA Routing: 071000013 · Account: 9876543210 · Swift: FNBCUS33<br>Please reference invoice number GT-2024-0156 with all payments.</p>
+      <p>Bank: First National Bank Â· ABA Routing: 071000013 Â· Account: 9876543210 Â· Swift: FNBCUS33<br>Please reference invoice number GT-2024-0156 with all payments.</p>
     </div>
   </div>
-  <div class="footer"><span>GlobalTech Solutions Inc. · Confidential</span><span>Page 1 of 1</span></div>
+  <div class="footer"><span>GlobalTech Solutions Inc. Â· Confidential</span><span>Page 1 of 1</span></div>
 </div>
 </body>
 </html>`,
@@ -694,11 +694,11 @@ export const invoiceTemplates: InvoiceTemplate[] = [
   </div>
   <div class="bank-info">
     <strong>Payment Details</strong>
-    Bank of America · Routing 026009593 · Account 1234567890<br>
-    Venmo: @alex-thompson-dev · PayPal: alex@alexthompson.dev<br>
+    Bank of America Â· Routing 026009593 Â· Account 1234567890<br>
+    Venmo: @alex-thompson-dev Â· PayPal: alex@alexthompson.dev<br>
     Please pay within 20 days. Reference: AT-2024-07
   </div>
-  <div class="footer">Thank you for working with me! Questions? alex@alexthompson.dev · (503) 555-0199</div>
+  <div class="footer">Thank you for working with me! Questions? alex@alexthompson.dev Â· (503) 555-0199</div>
 </div>
 </body>
 </html>`,
@@ -768,7 +768,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="dates-row">
       <div class="date-chip"><div class="dc-label">Issue Date</div><div class="dc-value">Mar 1, 2024</div></div>
       <div class="date-chip"><div class="dc-label">Due Date</div><div class="dc-value">Mar 31, 2024</div></div>
-      <div class="date-chip"><div class="dc-label">Status</div><div class="dc-value" style="color:#f59e0b">● Outstanding</div></div>
+      <div class="date-chip"><div class="dc-label">Status</div><div class="dc-value" style="color:#f59e0b">â— Outstanding</div></div>
     </div>
     <div class="grid-2">
       <div class="info-block">
@@ -789,13 +789,13 @@ export const invoiceTemplates: InvoiceTemplate[] = [
         <tr><td>AI Analytics Module</td><td>1</td><td>$1,200</td><td>$1,200.00</td></tr>
         <tr><td>Custom Integration (Slack)</td><td>1</td><td>$850</td><td>$850.00</td></tr>
         <tr><td>Priority Support Tier</td><td>12 mo</td><td>$99/mo</td><td>$1,188.00</td></tr>
-        <tr><td>Team Seats (×10)</td><td>12 mo</td><td>$15/seat</td><td>$1,800.00</td></tr>
+        <tr><td>Team Seats (Ã—10)</td><td>12 mo</td><td>$15/seat</td><td>$1,800.00</td></tr>
       </tbody>
     </table>
     <div class="total-section">
       <div class="total-box">
         <div class="total-row"><span>Subtotal</span><span>$8,626.00</span></div>
-        <div class="total-row"><span>Discount (10%)</span><span>−$862.60</span></div>
+        <div class="total-row"><span>Discount (10%)</span><span>âˆ’$862.60</span></div>
         <div class="total-row"><span>Tax (7%)</span><span>$544.72</span></div>
         <div class="total-grand">
           <span class="tg-label">Total Due</span>
@@ -804,8 +804,8 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       </div>
     </div>
     <div class="footer-bar">
-      <span>Orbit.io LLC · EIN 45-6789012</span>
-      <span>Wire: Silvergate Bank · Routing 122238420 · Acct 5678901234</span>
+      <span>Orbit.io LLC Â· EIN 45-6789012</span>
+      <span>Wire: Silvergate Bank Â· Routing 122238420 Â· Acct 5678901234</span>
     </div>
   </div>
 </div>
@@ -863,7 +863,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
   <div class="stamp-header">
     <div>
       <div class="brand-stamp">Meadow & Co.</div>
-      <div class="brand-year">Est. 2018 · Handmade Goods</div>
+      <div class="brand-year">Est. 2018 Â· Handmade Goods</div>
     </div>
     <div class="inv-stamp">
       <div class="stamp-box">
@@ -909,9 +909,9 @@ export const invoiceTemplates: InvoiceTemplate[] = [
         <div class="tr big"><span>Total</span><span>$2,318.62</span></div>
       </div>
     </div>
-    <div class="note-box">"Thank you so much for your order! Everything is packed with love and care. Please allow 5–7 business days for delivery. Returns accepted within 14 days of receipt."</div>
+    <div class="note-box">"Thank you so much for your order! Everything is packed with love and care. Please allow 5â€“7 business days for delivery. Returns accepted within 14 days of receipt."</div>
     <div class="footer-row">
-      <span>Venmo @meadowandco · Check payable to Meadow & Co. Studio</span>
+      <span>Venmo @meadowandco Â· Check payable to Meadow & Co. Studio</span>
       <span>meadowandco.com</span>
     </div>
   </div>
@@ -973,7 +973,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
   <div class="header">
     <div class="company">
       <h1>Apex Consulting Group</h1>
-      <p>Strategy · Operations · Growth<br>250 Park Avenue, New York, NY 10177<br>invoices@apexcg.com · (212) 555-0400</p>
+      <p>Strategy Â· Operations Â· Growth<br>250 Park Avenue, New York, NY 10177<br>invoices@apexcg.com Â· (212) 555-0400</p>
     </div>
     <div class="inv-right">
       <h2>INVOICE</h2>
@@ -1006,9 +1006,9 @@ export const invoiceTemplates: InvoiceTemplate[] = [
         <tr><td>Strategic Planning Workshop (2-day offsite)</td><td>Sr. Partner</td><td>16</td><td>$450</td><td>$7,200</td></tr>
         <tr><td>Market Entry Analysis Report</td><td>Associate</td><td>40</td><td>$280</td><td>$11,200</td></tr>
         <tr><td>Operations Efficiency Audit</td><td>Manager</td><td>24</td><td>$350</td><td>$8,400</td></tr>
-        <tr><td>Executive Coaching Sessions (×4)</td><td>Sr. Partner</td><td>8</td><td>$500</td><td>$4,000</td></tr>
+        <tr><td>Executive Coaching Sessions (Ã—4)</td><td>Sr. Partner</td><td>8</td><td>$500</td><td>$4,000</td></tr>
         <tr><td>Implementation Roadmap</td><td>Manager</td><td>20</td><td>$350</td><td>$7,000</td></tr>
-        <tr><td>Travel &amp; Expenses (Reimbursable)</td><td>—</td><td>—</td><td>—</td><td>$2,340</td></tr>
+        <tr><td>Travel &amp; Expenses (Reimbursable)</td><td>â€”</td><td>â€”</td><td>â€”</td><td>$2,340</td></tr>
       </tbody>
     </table>
     <div class="total-wrap">
@@ -1022,7 +1022,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     </div>
   </div>
   <div class="bottom-strip">
-    <div class="bs-text">Wire: JPMorgan Chase · Routing 021000021 · Acct 0987654321 · Ref: ACG-2024-0312</div>
+    <div class="bs-text">Wire: JPMorgan Chase Â· Routing 021000021 Â· Acct 0987654321 Â· Ref: ACG-2024-0312</div>
     <div class="bs-paid">Net 30</div>
   </div>
 </div>
@@ -1131,7 +1131,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       <div class="trow final"><span>Total Due</span><span>$17,331.00</span></div>
     </div>
   </div>
-  <div class="footer-note">BluePeak Agency LLC · EIN 93-1234567 · Bank: Chase · Routing 021000021 · Acct 4567890123<br>Thank you for your business! Questions? billing@bluepeak.io</div>
+  <div class="footer-note">BluePeak Agency LLC Â· EIN 93-1234567 Â· Bank: Chase Â· Routing 021000021 Â· Acct 4567890123<br>Thank you for your business! Questions? billing@bluepeak.io</div>
 </div>
 </body>
 </html>`,
@@ -1241,14 +1241,14 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="totals-row-wrap">
       <div class="totals-inner">
         <div class="tr"><span>Subtotal</span><span>$57,900.00</span></div>
-        <div class="tr"><span>Discount (5%)</span><span>−$2,895.00</span></div>
+        <div class="tr"><span>Discount (5%)</span><span>âˆ’$2,895.00</span></div>
         <div class="tr"><span>Tax (8%)</span><span>$4,400.40</span></div>
         <div class="tr grand"><span>Total Due</span><span>$59,405.40</span></div>
       </div>
     </div>
-    <div class="payment-note">Wire Transfer: Wells Fargo · Routing 121000248 · Account 9876543210 · SWIFT: WFBIUS6S<br>Please reference invoice #VTG-2024-0301 on all payments.</div>
+    <div class="payment-note">Wire Transfer: Wells Fargo Â· Routing 121000248 Â· Account 9876543210 Â· SWIFT: WFBIUS6S<br>Please reference invoice #VTG-2024-0301 on all payments.</div>
   </div>
-  <div class="footer"><span>Vantage Corp Inc. · Confidential Document</span><span>Page 1 of 1</span></div>
+  <div class="footer"><span>Vantage Corp Inc. Â· Confidential Document</span><span>Page 1 of 1</span></div>
 </div>
 </body>
 </html>`,
@@ -1310,49 +1310,49 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       </svg>
       <div class="brand-text">
         <div class="bname">Maison</div>
-        <div class="btag">Atelier de Luxe · Paris</div>
+        <div class="btag">Atelier de Luxe Â· Paris</div>
       </div>
     </div>
     <div class="inv-ref">
       <div class="ref-label">Facture / Invoice</div>
-      <div class="ref-num">MSN — 2024 — 041</div>
+      <div class="ref-num">MSN â€” 2024 â€” 041</div>
     </div>
   </div>
   <div class="gold-rule"></div>
   <div class="body">
     <div class="date-row">
-      <div class="date-item"><div class="di-label">Date d'émission</div><div class="di-value">1 Mars 2024</div></div>
-      <div class="date-item"><div class="di-label">Date d'échéance</div><div class="di-value">1 Avril 2024</div></div>
+      <div class="date-item"><div class="di-label">Date d'Ã©mission</div><div class="di-value">1 Mars 2024</div></div>
+      <div class="date-item"><div class="di-label">Date d'Ã©chÃ©ance</div><div class="di-value">1 Avril 2024</div></div>
     </div>
     <div class="parties">
       <div class="party">
         <div class="plabel">De la part de</div>
         <div class="pname">Maison Atelier de Luxe</div>
-        <div class="pinfo">14 Rue du Faubourg Saint-Honoré<br>75008 Paris, France<br>TVA: FR 12 345678901<br>facturation@maison-atelier.fr</div>
+        <div class="pinfo">14 Rue du Faubourg Saint-HonorÃ©<br>75008 Paris, France<br>TVA: FR 12 345678901<br>facturation@maison-atelier.fr</div>
       </div>
       <div class="party">
-        <div class="plabel">À l'attention de</div>
+        <div class="plabel">Ã€ l'attention de</div>
         <div class="pname">The Meridian Collection</div>
         <div class="pinfo">32 Old Bond Street<br>London, W1S 4PD<br>United Kingdom<br>accounts@meridiancollection.co.uk</div>
       </div>
     </div>
     <table>
-      <thead><tr><th>Service / Prestation</th><th>Qté</th><th>Prix unitaire</th><th>Montant HT</th></tr></thead>
+      <thead><tr><th>Service / Prestation</th><th>QtÃ©</th><th>Prix unitaire</th><th>Montant HT</th></tr></thead>
       <tbody>
-        <tr><td>Couture sur Mesure — Collection Printemps</td><td>3</td><td>€4,800</td><td>€14,400.00</td></tr>
-        <tr><td>Accessoires Signature (Pochette, Ceinture)</td><td>5</td><td>€1,200</td><td>€6,000.00</td></tr>
-        <tr><td>Consultation Stylisme Privée (4 séances)</td><td>4</td><td>€650</td><td>€2,600.00</td></tr>
-        <tr><td>Emballage Prestige &amp; Expédition Assurée</td><td>1</td><td>€480</td><td>€480.00</td></tr>
+        <tr><td>Couture sur Mesure â€” Collection Printemps</td><td>3</td><td>â‚¬4,800</td><td>â‚¬14,400.00</td></tr>
+        <tr><td>Accessoires Signature (Pochette, Ceinture)</td><td>5</td><td>â‚¬1,200</td><td>â‚¬6,000.00</td></tr>
+        <tr><td>Consultation Stylisme PrivÃ©e (4 sÃ©ances)</td><td>4</td><td>â‚¬650</td><td>â‚¬2,600.00</td></tr>
+        <tr><td>Emballage Prestige &amp; ExpÃ©dition AssurÃ©e</td><td>1</td><td>â‚¬480</td><td>â‚¬480.00</td></tr>
       </tbody>
     </table>
     <div class="total-area">
       <div class="total-inner">
-        <div class="tr"><span>Sous-total HT</span><span>€23,480.00</span></div>
-        <div class="tr"><span>TVA (20%)</span><span>€4,696.00</span></div>
-        <div class="tr final"><span>Total TTC</span><span>€28,176.00</span></div>
+        <div class="tr"><span>Sous-total HT</span><span>â‚¬23,480.00</span></div>
+        <div class="tr"><span>TVA (20%)</span><span>â‚¬4,696.00</span></div>
+        <div class="tr final"><span>Total TTC</span><span>â‚¬28,176.00</span></div>
       </div>
     </div>
-    <div class="closing">« Nous vous remercions de votre confiance et de votre fidélité. »<br>Virement IBAN: FR76 3000 4000 0101 2345 6789 012 · BIC: BNPAFRPPXXX</div>
+    <div class="closing">Â« Nous vous remercions de votre confiance et de votre fidÃ©litÃ©. Â»<br>Virement IBAN: FR76 3000 4000 0101 2345 6789 012 Â· BIC: BNPAFRPPXXX</div>
   </div>
 </div>
 </body>
@@ -1422,7 +1422,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
       <div class="meta-cell"><div class="mc-label">Issued</div><div class="mc-value">Mar 1, 2024</div></div>
       <div class="meta-cell"><div class="mc-label">Due</div><div class="mc-value">Apr 1, 2024</div></div>
       <div class="meta-cell"><div class="mc-label">Terms</div><div class="mc-value">Net 30</div></div>
-      <div class="meta-cell"><div class="mc-label">Status</div><div class="mc-value" style="color:#7c3aed">● Pending</div></div>
+      <div class="meta-cell"><div class="mc-label">Status</div><div class="mc-value" style="color:#7c3aed">â— Pending</div></div>
     </div>
     <div class="parties">
       <div class="party">
@@ -1453,7 +1453,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
         <div class="trow grand"><span>Total Due</span><span>$15,461.40</span></div>
       </div>
     </div>
-    <div class="footer">Prisma Studio LLC · EIN 85-1234567 · Wire: Bank of America · Routing 026009593 · Acct 1122334455<br>Thank you for collaborating with us ✦</div>
+    <div class="footer">Prisma Studio LLC Â· EIN 85-1234567 Â· Wire: Bank of America Â· Routing 026009593 Â· Acct 1122334455<br>Thank you for collaborating with us âœ¦</div>
   </div>
 </div>
 </body>
@@ -1564,7 +1564,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="client-info">
       <div class="ci-label">Billed To</div>
       <div class="ci-name">Momentum Creative Co.</div>
-      <div class="ci-sub">28 Studio Row, Los Angeles, CA 90038 · pay@momentumcreative.com</div>
+      <div class="ci-sub">28 Studio Row, Los Angeles, CA 90038 Â· pay@momentumcreative.com</div>
     </div>
     <table>
       <thead><tr><th>Project / Deliverable</th><th>Days</th><th>Day Rate</th><th>Total</th></tr></thead>
@@ -1583,7 +1583,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     </div>
     <div class="terms-note">
       Payment by ACH or wire transfer only.<br>
-      Chase Bank · Routing 071000013 · Account 5566778899<br>
+      Chase Bank Â· Routing 071000013 Â· Account 5566778899<br>
       Late payments subject to 2% monthly interest after due date.
     </div>
   </div>
