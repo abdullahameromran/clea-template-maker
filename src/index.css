@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 35% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 35% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 35% 10%;
+
+    --primary: 220 70% 20%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 35% 10%;
+
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 15% 46%;
+
+    --accent: 38 90% 52%;
+    --accent-foreground: 220 35% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 70% 20%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --navy: 220 70% 20%;
+    --navy-light: 220 50% 30%;
+    --gold: 38 90% 52%;
+    --gold-light: 38 80% 65%;
+    --surface: 0 0% 100%;
+    --surface-raised: 220 20% 99%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(220 70% 18%) 0%, hsl(230 60% 28%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(38 90% 52%) 0%, hsl(42 85% 60%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
+
+    --shadow-sm: 0 1px 3px 0 hsl(220 35% 10% / 0.06), 0 1px 2px -1px hsl(220 35% 10% / 0.06);
+    --shadow-md: 0 4px 6px -1px hsl(220 35% 10% / 0.08), 0 2px 4px -2px hsl(220 35% 10% / 0.08);
+    --shadow-lg: 0 10px 25px -5px hsl(220 35% 10% / 0.12), 0 8px 10px -6px hsl(220 35% 10% / 0.08);
+    --shadow-xl: 0 20px 40px -10px hsl(220 35% 10% / 0.18);
+    --shadow-gold: 0 8px 24px -4px hsl(38 90% 52% / 0.3);
+
+    --sidebar-background: 220 70% 16%;
+    --sidebar-foreground: 220 15% 88%;
+    --sidebar-primary: 38 90% 52%;
+    --sidebar-primary-foreground: 220 35% 10%;
+    --sidebar-accent: 220 60% 24%;
+    --sidebar-accent-foreground: 220 15% 88%;
+    --sidebar-border: 220 60% 24%;
+    --sidebar-ring: 38 90% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-mono-code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-md);
+  }
+  .shadow-hover {
+    box-shadow: var(--shadow-xl);
+  }
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+  .bg-navy {
+    background-color: hsl(var(--navy));
+  }
+  .text-navy {
+    color: hsl(var(--navy));
+  }
+}
