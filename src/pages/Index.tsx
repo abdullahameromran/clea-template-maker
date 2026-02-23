@@ -97,10 +97,10 @@ const Index = () => {
       <section id="features" className="bg-card border-b border-border py-10 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
-            { icon: <Palette size={22} className="text-primary" />, title: "20+ Unique Designs", desc: "From minimal to luxury - a style for every industry" },
-            { icon: <Copy size={22} className="text-primary" />, title: "Copy HTML Instantly", desc: "One click to copy the full HTML code, ready to paste" },
-            { icon: <Edit size={22} className="text-primary" />, title: "Fill & Customize", desc: "Add your company info and download personalized invoices" },
-            { icon: <Download size={22} className="text-primary" />, title: "Download & Print", desc: "Export as HTML or print to PDF directly from your browser" },
+            { icon: <Zap size={22} className="text-primary" />, title: "1. Install Plugin", desc: "Install Dynamic Invoice Engine in your automation flow" },
+            { icon: <Copy size={22} className="text-primary" />, title: "2. Copy JSON Body", desc: "Use the JSON body template shown on this website" },
+            { icon: <Edit size={22} className="text-primary" />, title: "3. Paste & Run", desc: "Paste the JSON body in your request and execute the node" },
+            { icon: <Download size={22} className="text-primary" />, title: "4. PDF Generated", desc: "Your final invoice PDF is generated automatically" },
           ].map((f) => (
             <div key={f.title} className="flex items-start gap-4">
               <div className="text-2xl">{f.icon}</div>

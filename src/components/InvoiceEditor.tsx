@@ -1,5 +1,5 @@
 ﻿import { useState, useMemo } from "react";
-import { invoiceTemplates, InvoiceTemplate } from "@/data/invoiceTemplates";
+import { invoiceTemplates } from "@/data/invoiceTemplates";
 import { Download, Copy, Check, FileText, ChevronDown, Eye } from "lucide-react";
 
 interface InvoiceVars {
@@ -30,8 +30,6 @@ const InvoiceEditor = () => {
   const [vars, setVars] = useState<InvoiceVars>(defaultVars);
   const [selectedTemplateId, setSelectedTemplateId] = useState(invoiceTemplates[0].id);
   const [copied, setCopied] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
-
   const selectedTemplate = invoiceTemplates.find((t) => t.id === selectedTemplateId)!;
 
   const processedHtml = useMemo(() => {
@@ -142,7 +140,7 @@ const InvoiceEditor = () => {
                 >
                   {invoiceTemplates.map((t) => (
                     <option key={t.id} value={t.id}>
-                      {t.name} â€” {t.category}
+                      {t.name} - {t.category}
                     </option>
                   ))}
                 </select>
@@ -265,7 +263,7 @@ const InvoiceEditor = () => {
 
             {hasAnyVar && (
               <p className="text-xs text-muted-foreground mt-3 text-center">
-                âœ… Your details will be applied to the template
+                Your details will be applied to the template.
               </p>
             )}
           </div>
@@ -277,7 +275,7 @@ const InvoiceEditor = () => {
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                 <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                <span className="ml-2 text-xs text-muted-foreground">Live Preview â€” {selectedTemplate.name}</span>
+                <span className="ml-2 text-xs text-muted-foreground">Live Preview - {selectedTemplate.name}</span>
               </div>
               <Eye size={14} className="text-muted-foreground" />
             </div>
@@ -300,3 +298,5 @@ const InvoiceEditor = () => {
 };
 
 export default InvoiceEditor;
+
+
