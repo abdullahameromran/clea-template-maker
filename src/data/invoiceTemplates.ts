@@ -175,7 +175,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="totals">
       <div class="totals-box">
         <div class="totals-row"><span>Subtotal</span><span>$5,960.00</span></div>
-        <div class="totals-row"><span>Discount (5%)</span><span>âˆ’$298.00</span></div>
+        <div class="totals-row"><span>Discount (5%)</span><span>-$298.00</span></div>
         <div class="totals-row"><span>Tax (10%)</span><span>$566.20</span></div>
         <div class="totals-row grand"><span>Grand Total</span><span>$6,228.20</span></div>
       </div>
@@ -795,7 +795,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="total-section">
       <div class="total-box">
         <div class="total-row"><span>Subtotal</span><span>$8,626.00</span></div>
-        <div class="total-row"><span>Discount (10%)</span><span>âˆ’$862.60</span></div>
+        <div class="total-row"><span>Discount (10%)</span><span>-$862.60</span></div>
         <div class="total-row"><span>Tax (7%)</span><span>$544.72</span></div>
         <div class="total-grand">
           <span class="tg-label">Total Due</span>
@@ -1241,7 +1241,7 @@ export const invoiceTemplates: InvoiceTemplate[] = [
     <div class="totals-row-wrap">
       <div class="totals-inner">
         <div class="tr"><span>Subtotal</span><span>$57,900.00</span></div>
-        <div class="tr"><span>Discount (5%)</span><span>âˆ’$2,895.00</span></div>
+        <div class="tr"><span>Discount (5%)</span><span>-$2,895.00</span></div>
         <div class="tr"><span>Tax (8%)</span><span>$4,400.40</span></div>
         <div class="tr grand"><span>Total Due</span><span>$59,405.40</span></div>
       </div>
@@ -1596,3 +1596,4 @@ export const invoiceTemplates: InvoiceTemplate[] = [
 // Import and merge additional templates
 import { additionalTemplates } from "./newTemplates";
 invoiceTemplates.push(...additionalTemplates);
+
