@@ -1,6 +1,6 @@
-﻿import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { InvoiceTemplate } from "@/data/invoiceTemplates";
-import { Eye, Code, Copy, Check } from "lucide-react";
+import { Eye, Code, Check } from "lucide-react";
 import TemplateModal from "./TemplateModal";
 
 interface TemplateCardProps {
@@ -46,9 +46,7 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
         }}
         onClick={() => setModalOpen(true)}
       >
-        {/* Preview window */}
         <div className="relative h-48 bg-secondary overflow-hidden border-b border-border">
-          {/* Browser chrome */}
           <div className="bg-muted h-7 flex items-center px-3 gap-1.5 border-b border-border shrink-0">
             <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
@@ -68,19 +66,18 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
             }}
             sandbox="allow-same-origin"
           />
-          {/* Hover overlay */}
-          {hasPassAccess && (
-            <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/70 transition-all duration-300 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 mt-7">
-              <button
-                className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setModalOpen(true);
-                }}
-              >
-                <Eye size={15} />
-                Preview
-              </button>
+          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/70 transition-all duration-300 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 mt-7">
+            <button
+              className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalOpen(true);
+              }}
+            >
+              <Eye size={15} />
+              Preview
+            </button>
+            {hasPassAccess && (
               <button
                 className="flex items-center gap-2 bg-card text-primary text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:bg-secondary transition-colors"
                 onClick={handleCopyHtml}
@@ -88,11 +85,10 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
                 {copied ? <Check size={15} className="text-green-600" /> : <Code size={15} />}
                 {copied ? "Copied!" : "Copy HTML"}
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
-        {/* Card info */}
         <div className="p-4">
           <div className="flex items-start justify-between gap-2 mb-1">
             <h3 className="text-sm font-bold text-foreground leading-tight">{template.name}</h3>
@@ -110,18 +106,18 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
               </span>
             ))}
           </div>
-          {hasPassAccess && (
-            <div className="mt-3 flex items-center gap-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setModalOpen(true);
-                }}
-                className="flex-1 flex items-center justify-center gap-2 bg-secondary text-foreground text-xs font-semibold px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors"
-              >
-                <Eye size={14} />
-                Preview
-              </button>
+          <div className="mt-3 flex items-center gap-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalOpen(true);
+              }}
+              className="flex-1 flex items-center justify-center gap-2 bg-secondary text-foreground text-xs font-semibold px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors"
+            >
+              <Eye size={14} />
+              Preview
+            </button>
+            {hasPassAccess && (
               <button
                 onClick={handleCopyHtml}
                 className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-2 rounded-lg hover:bg-primary/90 transition-colors"
@@ -129,25 +125,16 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
                 {copied ? <Check size={14} className="text-green-200" /> : <Code size={14} />}
                 {copied ? "Copied!" : "Copy HTML"}
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
-        {/* Color accent bar */}
-        <div
-          className="h-1"
-          style={{ background: template.primaryColor }}
-        />
+        <div className="h-1" style={{ background: template.primaryColor }} />
       </div>
 
-      <TemplateModal
-        template={template}
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-      />
+      <TemplateModal template={template} open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 };
 
 export default TemplateCard;
-

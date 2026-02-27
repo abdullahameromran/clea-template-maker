@@ -32,7 +32,6 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
   const [supabaseStatus, setSupabaseStatus] = useState<SupabaseStatus>("idle");
   const [supabaseMessage, setSupabaseMessage] = useState("");
   const [supabaseTemplate, setSupabaseTemplate] = useState<SupabaseInvoiceTemplateRow | null>(null);
-
   const hasPassAccess = useMemo(() => {
     if (typeof window === "undefined") {
       return false;
@@ -51,7 +50,7 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
   }, [template.name]);
 
   useEffect(() => {
-    if (!open || !hasPassAccess) {
+    if (!open) {
       return;
     }
 
@@ -65,7 +64,7 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
 
     let isMounted = true;
     setSupabaseStatus("loading");
-    setSupabaseMessage("Checking Supabase...");
+    setSupabaseMessage("Checking template data...");
     setSupabaseTemplate(null);
 
     fetchInvoiceTemplateById(template.id)
@@ -77,7 +76,7 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
         if (row) {
           setSupabaseTemplate(row);
           setSupabaseStatus("found");
-          setSupabaseMessage("Found by ID in Supabase.");
+          setSupabaseMessage("Template data available.");
           return;
         }
 
@@ -89,10 +88,10 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
         if (byName) {
           setSupabaseTemplate(byName);
           setSupabaseStatus("found");
-          setSupabaseMessage("Found by name in Supabase.");
+          setSupabaseMessage("Template data available.");
         } else {
           setSupabaseStatus("not_found");
-          setSupabaseMessage("No Supabase template found for this invoice.");
+          setSupabaseMessage("Template data unavailable.");
         }
       })
       .catch((error: unknown) => {
@@ -101,22 +100,40 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
         }
         const message = error instanceof Error ? error.message : "Supabase lookup failed.";
         setSupabaseStatus("error");
-        setSupabaseMessage(message);
+        setSupabaseMessage(message ? "Template data unavailable." : "Template data unavailable.");
       });
 
     return () => {
       isMounted = false;
     };
-  }, [open, hasPassAccess, template.id, nameCandidates]);
+  }, [open, template.id, nameCandidates]);
 
-  const variableDefinitions = useMemo(
-    () => parseVariableDefinitions(supabaseTemplate?.variables),
-    [supabaseTemplate]
-  );
+  const variableDefinitions = useMemo(() => {
+    if (!supabaseTemplate) {
+      return [];
+    }
+
+    const fromDb = parseVariableDefinitions(supabaseTemplate.variables);
+    if (fromDb.length > 0) {
+      return fromDb;
+    }
+
+    const fallbackFromHtml = extractVariablesFromHtml(supabaseTemplate.html_body);
+    if (fallbackFromHtml.length > 0) {
+      return fallbackFromHtml.map((key) => ({ key }));
+    }
+
+    return [];
+  }, [supabaseTemplate]);
 
   const generatedBody = useMemo(() => {
     if (!supabaseTemplate) {
       return null;
+    }
+
+    const fromColumn = parseSampleBody(supabaseTemplate.sample_body);
+    if (fromColumn) {
+      return JSON.stringify(fromColumn, null, 2);
     }
 
     const variableData = buildVariableData(variableDefinitions);
@@ -168,6 +185,12 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
     }
   };
 
+  useEffect(() => {
+    if (!hasPassAccess && activeTab === "html") {
+      setActiveTab("preview");
+    }
+  }, [hasPassAccess, activeTab]);
+
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
       <DialogContent className="max-w-5xl w-[95vw] h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
@@ -177,19 +200,19 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
             <p className="text-sm text-muted-foreground mt-0.5">{template.description}</p>
           </div>
           <div className="flex items-center flex-wrap justify-end gap-2">
-            {hasPassAccess && (
-              <div className="flex bg-muted rounded-lg p-1 gap-1">
-                <button
-                  onClick={() => setActiveTab("preview")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    activeTab === "preview"
-                      ? "bg-card text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Eye size={14} />
-                  Preview
-                </button>
+            <div className="flex bg-muted rounded-lg p-1 gap-1">
+              <button
+                onClick={() => setActiveTab("preview")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                  activeTab === "preview"
+                    ? "bg-card text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Eye size={14} />
+                Preview
+              </button>
+              {hasPassAccess && (
                 <button
                   onClick={() => setActiveTab("html")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
@@ -201,10 +224,10 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
                   <Code size={14} />
                   HTML Code
                 </button>
-              </div>
-            )}
-            {hasPassAccess && (
-              <>
+              )}
+            </div>
+            <>
+              {hasPassAccess && (
                 <button
                   onClick={handleDownload}
                   className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
@@ -212,6 +235,8 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
                   <Download size={15} />
                   Download HTML
                 </button>
+              )}
+              {hasPassAccess && (
                 <button
                   onClick={handlePrint}
                   className="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-card border border-border text-foreground hover:bg-secondary transition-colors"
@@ -219,6 +244,8 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
                   <Printer size={15} />
                   Print/PDF
                 </button>
+              )}
+              {hasPassAccess && (
                 <button
                   onClick={handleCopy}
                   className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-all"
@@ -230,8 +257,8 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
                   {copied ? <Check size={15} /> : <Copy size={15} />}
                   {copied ? "Copied!" : "Copy HTML"}
                 </button>
-              </>
-            )}
+              )}
+            </>
             <button
               onClick={onClose}
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -241,46 +268,61 @@ const TemplateModal = ({ template, open, onClose }: TemplateModalProps) => {
           </div>
         </div>
 
-        {hasPassAccess && (
-          <>
-            <div className="px-4 md:px-6 py-2 border-b border-border bg-background/80 text-xs">
-              {supabaseStatus === "idle" && <span className="text-muted-foreground">Supabase status: idle</span>}
-              {supabaseStatus === "loading" && <span className="text-muted-foreground">{supabaseMessage}</span>}
-              {supabaseStatus === "found" && <span className="text-green-700">{supabaseMessage}</span>}
-              {supabaseStatus === "not_found" && <span className="text-amber-700">{supabaseMessage}</span>}
-              {supabaseStatus === "error" && <span className="text-red-700">{supabaseMessage}</span>}
-            </div>
+        <div className="px-4 md:px-6 py-2 border-b border-border bg-background/80 text-xs">
+          {supabaseStatus === "idle" && (
+            <span className="inline-flex items-center gap-2 text-muted-foreground">
+              <span className="w-2 h-2 rounded-full bg-muted-foreground/50" />
+              Waiting for template data
+            </span>
+          )}
+          {supabaseStatus === "loading" && (
+            <span className="inline-flex items-center gap-2 text-muted-foreground">
+              <span className="w-2 h-2 rounded-full bg-muted-foreground animate-pulse" />
+              {supabaseMessage}
+            </span>
+          )}
+          {supabaseStatus === "found" && (
+            <span className="inline-flex items-center gap-2 text-green-700">
+              <span className="w-2 h-2 rounded-full bg-green-600" />
+              Template ready
+            </span>
+          )}
+          {(supabaseStatus === "not_found" || supabaseStatus === "error") && (
+            <span className="inline-flex items-center gap-2 text-red-700">
+              <span className="w-2 h-2 rounded-full bg-red-600" />
+              Template unavailable
+            </span>
+          )}
+        </div>
 
-            {supabaseTemplate && (
-              <div className="px-4 md:px-6 py-3 border-b border-border bg-card/80">
-                <div className="text-xs text-muted-foreground mb-2">
-                  Supabase template: <span className="text-foreground font-semibold">{supabaseTemplate.name}</span> ({supabaseTemplate.id})
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                  <div>
-                    <div className="text-xs font-semibold text-foreground mb-1">Variables (from Supabase)</div>
-                    <pre className="max-h-40 overflow-auto rounded border border-border bg-muted p-2 text-[11px] leading-5">
-                      {JSON.stringify(variableDefinitions, null, 2)}
-                    </pre>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="text-xs font-semibold text-foreground">Sample request body</div>
-                      <button
-                        onClick={handleCopyGeneratedBody}
-                        className="text-xs px-2 py-1 rounded border border-border hover:bg-secondary transition-colors"
-                      >
-                        {copiedPayload ? "Copied!" : "Copy Body"}
-                      </button>
-                    </div>
-                    <pre className="max-h-40 overflow-auto rounded border border-border bg-muted p-2 text-[11px] leading-5">
-                      {generatedBody}
-                    </pre>
-                  </div>
-                </div>
+        {supabaseTemplate && (
+          <div className="px-4 md:px-6 py-3 border-b border-border bg-card/80">
+            <div className="text-xs text-muted-foreground mb-2">
+              Template: <span className="text-foreground font-semibold">{supabaseTemplate.name}</span> ({supabaseTemplate.id})
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              <div>
+                <div className="text-xs font-semibold text-foreground mb-1">Variables</div>
+                <pre className="max-h-44 overflow-auto rounded border border-border bg-muted p-2 text-[11px] leading-5">
+                  {JSON.stringify(variableDefinitions, null, 2)}
+                </pre>
               </div>
-            )}
-          </>
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="text-xs font-semibold text-foreground">Generated sample body</div>
+                  <button
+                    onClick={handleCopyGeneratedBody}
+                    className="text-xs px-2 py-1 rounded border border-border hover:bg-secondary transition-colors"
+                  >
+                    {copiedPayload ? "Copied!" : "Copy Body"}
+                  </button>
+                </div>
+                <pre className="max-h-44 overflow-auto rounded border border-border bg-muted p-2 text-[11px] leading-5">
+                  {generatedBody}
+                </pre>
+              </div>
+            </div>
+          </div>
         )}
 
         <div className="flex-1 overflow-hidden">
@@ -419,6 +461,43 @@ function inferExampleValue(def: VariableDefinition): unknown {
     return "Sample Name";
   }
   return "";
+}
+
+function parseSampleBody(raw: unknown): Record<string, unknown> | null {
+  if (!raw) {
+    return null;
+  }
+
+  if (typeof raw === "string") {
+    try {
+      const parsed = JSON.parse(raw);
+      return isRecord(parsed) ? parsed : null;
+    } catch {
+      return null;
+    }
+  }
+
+  return isRecord(raw) ? raw : null;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function extractVariablesFromHtml(html: string): string[] {
+  const found = new Set<string>();
+  const regex = /\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g;
+  let match: RegExpExecArray | null = regex.exec(html);
+
+  while (match) {
+    const key = match[1]?.trim();
+    if (key) {
+      found.add(key);
+    }
+    match = regex.exec(html);
+  }
+
+  return Array.from(found);
 }
 
 function colorizeHtml(line: string): React.ReactNode {

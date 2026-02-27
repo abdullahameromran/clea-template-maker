@@ -1,9 +1,10 @@
-﻿import heroBanner from "@/assets/hero-banner.jpg";
-import { useState, useMemo } from "react";
+import heroBanner from "@/assets/hero-banner.jpg";
+import { useState, useMemo, useEffect } from "react";
 import { invoiceTemplates } from "@/data/invoiceTemplates";
 import TemplateCard from "@/components/TemplateCard";
 import InvoiceEditor from "@/components/InvoiceEditor";
-import { Search, FileText, Zap, Download, Edit, Palette, Copy } from "lucide-react";
+import { Search, FileText, Zap, Download, Edit, Copy } from "lucide-react";
+import { fetchInvoiceTemplateNameActivity, getSupabaseConfigError } from "@/lib/supabaseTemplates";
 
 const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate"];
 
@@ -11,9 +12,38 @@ const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate
 const Index = () => {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [dbActiveByName, setDbActiveByName] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const configError = getSupabaseConfigError();
+    if (configError) {
+      return;
+    }
+
+    let isMounted = true;
+    fetchInvoiceTemplateNameActivity()
+      .then((map) => {
+        if (!isMounted) {
+          return;
+        }
+        setDbActiveByName(map);
+      })
+      .catch(() => {
+        // Fallback to local templates if Supabase activity lookup fails.
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const filtered = useMemo(() => {
     return invoiceTemplates.filter((t) => {
+      const dbActive = dbActiveByName[t.name.trim().toLowerCase()];
+      if (dbActive === false) {
+        return false;
+      }
+
       const matchesSearch =
         search.trim() === "" ||
         t.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -22,7 +52,7 @@ const Index = () => {
         activeCategory === "All" || t.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [search, activeCategory]);
+  }, [search, activeCategory, dbActiveByName]);
 
   return (
     <div className="min-h-screen bg-background">

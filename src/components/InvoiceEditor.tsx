@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo } from "react";
 import { invoiceTemplates } from "@/data/invoiceTemplates";
-import { Download, Copy, Check, FileText, ChevronDown, Eye } from "lucide-react";
+import { Copy, Check, FileText, ChevronDown, Eye } from "lucide-react";
 
 interface InvoiceVars {
   companyName: string;
@@ -81,18 +81,6 @@ const InvoiceEditor = () => {
     navigator.clipboard.writeText(processedHtml);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
-  };
-
-  const handleDownload = () => {
-    const blob = new Blob([processedHtml], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `invoice-${selectedTemplate.id}.html`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   const handlePrint = () => {
@@ -238,13 +226,6 @@ const InvoiceEditor = () => {
 
             {/* Actions */}
             <div className="flex flex-wrap gap-3 mt-6 pt-6 border-t border-border">
-              <button
-                onClick={handleDownload}
-                className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold px-4 py-3 rounded-xl gradient-gold text-foreground hover:opacity-90 transition-opacity"
-              >
-                <Download size={16} />
-                Download HTML
-              </button>
               <button
                 onClick={handlePrint}
                 className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
