@@ -221,6 +221,24 @@ const Index = () => {
         </div>
         <p>Free professional invoice templates for businesses of all sizes.</p>
         <p className="mt-1">Copy, customize, and use without restrictions.</p>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-white/80">
+          <a
+            href="https://linkedin.com/in/abdullah-amer-584237224/"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://wa.me/201554670453"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            WhatsApp
+          </a>
+        </div>
       </footer>
     </div>
   );
