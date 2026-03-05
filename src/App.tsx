@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { User } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { getSupabaseClientConfigError, supabase } from "./lib/supabaseClient";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -54,16 +54,13 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {!user ? (
-          <AuthPage />
-        ) : (
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index user={user} />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        )}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index user={user} />} />
+            <Route path="/auth" element={user ? <Navigate to="/" replace /> : <AuthPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );

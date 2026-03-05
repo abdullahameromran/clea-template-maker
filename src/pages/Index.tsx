@@ -8,12 +8,13 @@ import { Search, FileText, Zap, Download, Edit, Copy } from "lucide-react";
 import { fetchInvoiceTemplateNameActivity, getSupabaseConfigError } from "@/lib/supabaseTemplates";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
+import { Link } from "react-router-dom";
 
 const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate"];
 
 // Invoice template gallery page
 interface IndexProps {
-  user: User;
+  user: User | null;
 }
 
 const Index = ({ user }: IndexProps) => {
@@ -90,13 +91,24 @@ const Index = ({ user }: IndexProps) => {
             <a href="#features" className="hover:text-white transition-colors">Features</a>
           </div>
           <div className="flex items-center gap-3">
-            <span className="hidden lg:inline text-xs text-white/75">{user.email}</span>
-            <button
-              onClick={handleSignOut}
-              className="text-sm font-semibold px-4 py-2 rounded-lg gradient-gold text-foreground hover:opacity-90 transition-opacity"
-            >
-              Logout
-            </button>
+            {user ? (
+              <>
+                <span className="hidden lg:inline text-xs text-white/75">{user.email}</span>
+                <button
+                  onClick={handleSignOut}
+                  className="text-sm font-semibold px-4 py-2 rounded-lg gradient-gold text-foreground hover:opacity-90 transition-opacity"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                className="text-sm font-semibold px-4 py-2 rounded-lg gradient-gold text-foreground hover:opacity-90 transition-opacity"
+              >
+                Login / Signup
+              </Link>
+            )}
           </div>
         </div>
       </nav>
@@ -230,7 +242,24 @@ const Index = ({ user }: IndexProps) => {
 
       {/* Invoice Editor */}
       <InvoiceEditor />
-      <AITemplateStudio user={user} onTemplatesUpdated={setUserTemplates} />
+      {user ? (
+        <AITemplateStudio user={user} onTemplatesUpdated={setUserTemplates} />
+      ) : (
+        <section id="ai-studio" className="py-16 px-6 bg-card border-y border-border">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="font-display text-4xl font-bold text-foreground mb-3">AI Template Studio</h2>
+            <p className="text-muted-foreground text-lg mb-6">
+              Browse templates as guest. Login to generate with AI, save templates, and use drag & drop editor.
+            </p>
+            <Link
+              to="/auth"
+              className="inline-flex items-center justify-center rounded-xl gradient-gold text-foreground px-6 py-3 text-sm font-bold"
+            >
+              Login to Use AI Tools
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="bg-navy text-white/60 py-10 px-6 text-center text-sm">
