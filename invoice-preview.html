@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#e2e8f0;background:#0a0f1e;padding:40px;}
+.invoice{max-width:760px;margin:0 auto;background:#0f172a;border:1px solid #1e293b;border-radius:16px;overflow:hidden;}
+.header{padding:40px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #1e293b;}
+.brand-name{font-size:22px;font-weight:800;color:#f1f5f9;letter-spacing:-0.5px;}
+.brand-dot{color:#22d3ee;}
+.brand-sub{font-size:12px;color:#475569;margin-top:4px;}
+.inv-badge{background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:8px;padding:12px 20px;text-align:right;}
+.inv-badge .inv-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#22d3ee;margin-bottom:4px;}
+.inv-badge .inv-num{font-size:20px;font-weight:800;color:#f1f5f9;}
+.cyan-bar{height:2px;background:linear-gradient(90deg,#22d3ee,#818cf8,transparent);}
+.body{padding:40px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px;}
+.info-block .info-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#22d3ee;margin-bottom:10px;}
+.info-block .info-name{font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:4px;}
+.info-block .info-text{font-size:13px;color:#64748b;line-height:1.7;white-space:pre-line;}
+.dates-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+.date-chip{background:#1e293b;border-radius:8px;padding:14px 16px;}
+.date-chip .dc-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#475569;margin-bottom:6px;}
+.date-chip .dc-value{font-size:14px;font-weight:600;color:#e2e8f0;}
+table{width:100%;border-collapse:collapse;margin-bottom:32px;}
+thead tr{background:#1e293b;}
+thead th{padding:12px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#64748b;}
+thead th:last-child{text-align:right;}
+tbody td{padding:16px;font-size:14px;color:#cbd5e1;border-bottom:1px solid #1e293b;}
+tbody td:last-child{text-align:right;color:#22d3ee;font-weight:700;}
+.total-section{display:flex;justify-content:flex-end;}
+.total-box{width:260px;}
+.total-row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;color:#64748b;border-bottom:1px solid #1e293b;}
+.total-grand{display:flex;justify-content:space-between;margin-top:16px;padding:16px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:8px;}
+.total-grand .tg-label{font-size:16px;font-weight:800;color:#f1f5f9;}
+.total-grand .tg-value{font-size:20px;font-weight:900;color:#22d3ee;}
+.footer-bar{margin-top:40px;padding:20px 0 0;border-top:1px solid #1e293b;display:flex;justify-content:space-between;font-size:12px;color:#475569;}
+</style>
+</head>
+<body>
+<div class="invoice">
+
+<div class="header">
+  <div>
+    <div class="brand-name">Acme Studio<span class="brand-dot">.</span></div>
+    <div class="brand-sub">Design & Development</div>
+  </div>
+  <div class="inv-badge">
+    <div class="inv-label">Invoice</div>
+    <div class="inv-num">#INV-2025-4821</div>
+  </div>
+</div>
+
+<div class="cyan-bar"></div>
+
+<div class="body">
+
+<div class="dates-row">
+  <div class="date-chip"><div class="dc-label">Issue Date</div><div class="dc-value">01 Jun 2025</div></div>
+  <div class="date-chip"><div class="dc-label">Due Date</div><div class="dc-value">15 Jun 2025</div></div>
+  <div class="date-chip"><div class="dc-label">Terms</div><div class="dc-value">Net 14</div></div>
+</div>
+
+<div class="grid-2">
+  <div class="info-block">
+    <div class="info-label">Provider</div>
+    <div class="info-name">Acme Studio LLC</div>
+    <div class="info-text">123 Creator Ave
+New York, NY 10001
+billing@acmestudio.io</div>
+  </div>
+  <div class="info-block">
+    <div class="info-label">Client</div>
+    <div class="info-name">GlobalCorp Inc.</div>
+    <div class="info-text">456 Enterprise Blvd
+San Francisco, CA 94107
+accounts@globalcorp.com</div>
+  </div>
+</div>
+
+<table>
+<thead><tr><th>Service / Item</th><th>Units</th><th>Unit Price</th><th>Amount</th></tr></thead>
+<tbody>
+
+<tr>
+  <td>UI/UX Design — Homepage Redesign</td>
+  <td>20</td>
+  <td>$100.00</td>
+  <td>$2,000.00</td>
+</tr>
+<tr>
+  <td>Frontend Development</td>
+  <td>15</td>
+  <td>$120.00</td>
+  <td>$1,800.00</td>
+</tr>
+<tr>
+  <td>Project Management & QA</td>
+  <td>7</td>
+  <td>$100.00</td>
+  <td>$700.00</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="total-section">
+  <div class="total-box">
+    <div class="total-row"><span>Subtotal</span><span>$4,500.00</span></div>
+    <div class="total-row"><span>Discount</span><span>$0.00</span></div>
+    <div class="total-row"><span>VAT (10%)</span><span>$450.00</span></div>
+    <div class="total-grand">
+      <span class="tg-label">Total Due</span>
+      <span class="tg-value">$4,950.00</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <span>hello@acmestudio.io</span>
+  <span style="white-space:pre-line;">Bank: Chase
+Acc: 0012-3456-7890
+Routing: 021000021</span>
+</div>
+
+</div>
+</div>
+</body>
+</html>

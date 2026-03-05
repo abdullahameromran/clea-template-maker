@@ -1,18 +1,26 @@
 import heroBanner from "@/assets/hero-banner.jpg";
 import { useState, useMemo, useEffect } from "react";
-import { invoiceTemplates } from "@/data/invoiceTemplates";
+import { InvoiceTemplate, invoiceTemplates } from "@/data/invoiceTemplates";
 import TemplateCard from "@/components/TemplateCard";
 import InvoiceEditor from "@/components/InvoiceEditor";
+import AITemplateStudio from "@/components/AITemplateStudio";
 import { Search, FileText, Zap, Download, Edit, Copy } from "lucide-react";
 import { fetchInvoiceTemplateNameActivity, getSupabaseConfigError } from "@/lib/supabaseTemplates";
+import { User } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabaseClient";
 
 const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate"];
 
 // Invoice template gallery page
-const Index = () => {
+interface IndexProps {
+  user: User;
+}
+
+const Index = ({ user }: IndexProps) => {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [dbActiveByName, setDbActiveByName] = useState<Record<string, boolean>>({});
+  const [userTemplates, setUserTemplates] = useState<InvoiceTemplate[]>([]);
 
   useEffect(() => {
     const configError = getSupabaseConfigError();
@@ -38,7 +46,8 @@ const Index = () => {
   }, []);
 
   const filtered = useMemo(() => {
-    return invoiceTemplates.filter((t) => {
+    const templates = [...userTemplates, ...invoiceTemplates];
+    return templates.filter((t) => {
       const dbActive = dbActiveByName[t.name.trim().toLowerCase()];
       if (dbActive === false) {
         return false;
@@ -52,7 +61,14 @@ const Index = () => {
         activeCategory === "All" || t.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [search, activeCategory, dbActiveByName]);
+  }, [search, activeCategory, dbActiveByName, userTemplates]);
+
+  const handleSignOut = async () => {
+    if (!supabase) {
+      return;
+    }
+    await supabase.auth.signOut();
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,20 +80,24 @@ const Index = () => {
               <FileText size={16} className="text-foreground" />
             </div>
             <span className="text-white font-bold text-lg tracking-tight">
-              Invoice<span className="text-gold">Hub</span>
+              PDF<span className="text-gold">Generator</span>
             </span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm text-white/70">
             <a href="#templates" className="hover:text-white transition-colors">Templates</a>
             <a href="#editor" className="hover:text-white transition-colors">Editor</a>
+            <a href="#ai-studio" className="hover:text-white transition-colors">AI Studio</a>
             <a href="#features" className="hover:text-white transition-colors">Features</a>
           </div>
-          <a
-            href="#templates"
-            className="text-sm font-semibold px-4 py-2 rounded-lg gradient-gold text-foreground hover:opacity-90 transition-opacity"
-          >
-            Browse Free Templates
-          </a>
+          <div className="flex items-center gap-3">
+            <span className="hidden lg:inline text-xs text-white/75">{user.email}</span>
+            <button
+              onClick={handleSignOut}
+              className="text-sm font-semibold px-4 py-2 rounded-lg gradient-gold text-foreground hover:opacity-90 transition-opacity"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -210,6 +230,7 @@ const Index = () => {
 
       {/* Invoice Editor */}
       <InvoiceEditor />
+      <AITemplateStudio user={user} onTemplatesUpdated={setUserTemplates} />
 
       {/* Footer */}
       <footer className="bg-navy text-white/60 py-10 px-6 text-center text-sm">
@@ -217,7 +238,7 @@ const Index = () => {
           <div className="w-6 h-6 rounded-md gradient-gold flex items-center justify-center">
             <FileText size={12} className="text-foreground" />
           </div>
-          <span className="text-white font-bold">InvoiceHub</span>
+          <span className="text-white font-bold">PDF Generator</span>
         </div>
         <p>Free professional invoice templates for businesses of all sizes.</p>
         <p className="mt-1">Copy, customize, and use without restrictions.</p>

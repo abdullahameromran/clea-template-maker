@@ -7,6 +7,7 @@ export interface SupabaseInvoiceTemplateRow {
   sample_body?: unknown;
   version: number;
   is_active: boolean;
+  user_id?: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -48,14 +49,16 @@ interface SupabaseTemplateActivityRow {
 }
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const supabaseApiKey = import.meta.env.VITE_SUPABASE_API_KEY as string | undefined;
+const supabaseApiKey =
+  (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) ||
+  (import.meta.env.VITE_SUPABASE_API_KEY as string | undefined);
 
 export function getSupabaseConfigError(): string | null {
   if (!supabaseUrl) {
     return "Missing VITE_SUPABASE_URL";
   }
   if (!supabaseApiKey) {
-    return "Missing VITE_SUPABASE_API_KEY";
+    return "Missing VITE_SUPABASE_ANON_KEY";
   }
   return null;
 }
