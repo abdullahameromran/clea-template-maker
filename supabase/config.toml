@@ -1,0 +1,19 @@
+project_id = "nxqtduvaaacxsxkkaopd"
+
+[functions.create-stripe-checkout-session]
+verify_jwt = true
+
+[functions.create-stripe-portal-session]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.create-user-api-key]
+verify_jwt = true
+
+[functions.revoke-user-api-key]
+verify_jwt = true
+
+[functions.generate-pdf-api]
+verify_jwt = false

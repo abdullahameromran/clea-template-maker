@@ -4,6 +4,7 @@ import { InvoiceTemplate, invoiceTemplates } from "@/data/invoiceTemplates";
 import TemplateCard from "@/components/TemplateCard";
 import InvoiceEditor from "@/components/InvoiceEditor";
 import AITemplateStudio from "@/components/AITemplateStudio";
+import PricingSection from "@/components/PricingSection";
 import { Search, FileText, Zap, Download, Edit, Copy } from "lucide-react";
 import { fetchInvoiceTemplateNameActivity, getSupabaseConfigError } from "@/lib/supabaseTemplates";
 import { User } from "@supabase/supabase-js";
@@ -87,6 +88,7 @@ const Index = ({ user }: IndexProps) => {
           <div className="hidden md:flex items-center gap-6 text-sm text-white/70">
             <a href="#templates" className="hover:text-white transition-colors">Templates</a>
             <a href="#editor" className="hover:text-white transition-colors">Editor</a>
+            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
             <a href="#ai-studio" className="hover:text-white transition-colors">AI Studio</a>
             <a href="#features" className="hover:text-white transition-colors">Features</a>
           </div>
@@ -126,15 +128,15 @@ const Index = ({ user }: IndexProps) => {
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
             <Zap size={14} className="text-gold" />
-            <span className="text-white/90">20+ Professional Templates - 100% Free</span>
+            <span className="text-white/90">Start Free, Upgrade When Volume Kicks In</span>
           </div>
           <h1 className="font-display text-5xl md:text-6xl font-bold leading-tight mb-6">
             Beautiful Invoice
             <br />
-            <span className="text-gold">Templates</span> Ready to Use
+            <span className="text-gold">Templates</span> with Built-In Billing Plans
           </h1>
           <p className="text-lg text-white/70 max-w-2xl mx-auto mb-10">
-            Browse, preview, and copy complete HTML invoice templates. Each one is production-ready and fully customizable for your business.
+            Browse templates, generate branded PDFs, and scale from 100 free invoices per month to enterprise-grade automation with API access and priority rendering.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
@@ -145,11 +147,11 @@ const Index = ({ user }: IndexProps) => {
               Browse Templates
             </a>
             <a
-              href="#features"
+              href="#pricing"
               className="bg-white/10 border border-white/20 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-white/20 transition-colors inline-flex items-center gap-2"
             >
               <Download size={18} />
-              How It Works
+              View Pricing
             </a>
           </div>
         </div>
@@ -159,10 +161,10 @@ const Index = ({ user }: IndexProps) => {
       <section id="features" className="bg-card border-b border-border py-10 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
-            { icon: <Zap size={22} className="text-primary" />, title: "1. Install Plugin", desc: "Install Dynamic Invoice Engine in your automation flow" },
-            { icon: <Copy size={22} className="text-primary" />, title: "2. Copy JSON Body", desc: "Use the JSON body template shown on this website" },
-            { icon: <Edit size={22} className="text-primary" />, title: "3. Paste & Run", desc: "Paste the JSON body in your request and execute the node" },
-            { icon: <Download size={22} className="text-primary" />, title: "4. PDF Generated", desc: "Your final invoice PDF is generated automatically" },
+            { icon: <Zap size={22} className="text-primary" />, title: "1. Start on Free", desc: "Access every template with 100 invoices per month and basic PDF generation" },
+            { icon: <Copy size={22} className="text-primary" />, title: "2. Save Your Brand", desc: "Upgrade to Pro to remove the watermark and apply your own logo and colors" },
+            { icon: <Edit size={22} className="text-primary" />, title: "3. Connect Workflows", desc: "Business unlocks API, automation, team seats, and invoice history" },
+            { icon: <Download size={22} className="text-primary" />, title: "4. Scale Confidently", desc: "Enterprise gives you priority queue, SLA, white-label, and bulk generation" },
           ].map((f) => (
             <div key={f.title} className="flex items-start gap-4">
               <div className="text-2xl">{f.icon}</div>
@@ -174,6 +176,8 @@ const Index = ({ user }: IndexProps) => {
           ))}
         </div>
       </section>
+
+      <PricingSection user={user} />
 
       {/* Templates section */}
       <section id="templates" className="py-16 px-6">
