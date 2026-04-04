@@ -2,10 +2,26 @@ import { FormEvent, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Check, FileText, ShieldCheck, Sparkles } from "lucide-react";
 import { getSupabaseClientConfigError, supabase } from "@/lib/supabaseClient";
+import { useSeo } from "@/lib/seo";
 
 type Mode = "login" | "signup";
 
 const AuthPage = () => {
+  useSeo({
+    title: "Login or Sign Up for InvoiceHub | Invoice Templates & PDF Generator",
+    description:
+      "Sign in to save invoice templates, manage billing, access API keys, and generate invoice layouts with AI.",
+    path: "/auth",
+    robots: "noindex,follow",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "InvoiceHub Login",
+      description:
+        "Sign in to save invoice templates, manage billing, access API keys, and generate invoice layouts with AI.",
+    },
+  });
+
   const [mode, setMode] = useState<Mode>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

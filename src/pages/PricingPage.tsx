@@ -3,12 +3,30 @@ import { User } from "@supabase/supabase-js";
 import { ArrowLeft, Crown, FileText } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import PricingSection from "@/components/PricingSection";
+import { getOrganizationJsonLd, useSeo } from "@/lib/seo";
 
 interface PricingPageProps {
   user: User | null;
 }
 
 const PricingPage = ({ user }: PricingPageProps) => {
+  useSeo({
+    title: "Pricing Plans for Invoice PDF API & Templates | InvoiceHub",
+    description:
+      "Compare Free, Pro, Business, and Enterprise pricing for invoice templates, PDF generation, API access, usage limits, and automation workflows.",
+    path: "/pricing",
+    jsonLd: [
+      getOrganizationJsonLd(),
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "InvoiceHub Pricing",
+        description:
+          "Compare Free, Pro, Business, and Enterprise pricing for invoice templates, PDF generation, API access, usage limits, and automation workflows.",
+      },
+    ],
+  });
+
   const handleSignOut = async () => {
     if (!supabase) {
       return;

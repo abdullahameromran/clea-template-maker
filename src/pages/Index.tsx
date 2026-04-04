@@ -20,6 +20,7 @@ import { fetchInvoiceTemplateNameActivity, getSupabaseConfigError } from "@/lib/
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 import { Link } from "react-router-dom";
+import { getOrganizationJsonLd, getWebsiteJsonLd, useSeo } from "@/lib/seo";
 
 const categories = ["All", "Minimal", "Modern", "Luxury", "Creative", "Corporate"];
 
@@ -628,6 +629,29 @@ function GuestLanding({
 }
 
 const Index = ({ user }: IndexProps) => {
+  useSeo({
+    title: "Free Invoice Template Generator & PDF Invoice Maker | InvoiceHub",
+    description:
+      "Create invoices with professional templates, AI-powered customization, PDF export, API access, and scalable plans for freelancers, agencies, and SaaS teams.",
+    path: "/",
+    jsonLd: [
+      getOrganizationJsonLd(),
+      getWebsiteJsonLd(),
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "InvoiceHub PDF Generator",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+        },
+      },
+    ],
+  });
+
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [dbActiveByName, setDbActiveByName] = useState<Record<string, boolean>>({});
