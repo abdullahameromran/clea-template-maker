@@ -9,6 +9,7 @@ import { getSupabaseClientConfigError, supabase } from "./lib/supabaseClient";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AuthPage from "./pages/AuthPage";
+import PricingPage from "./pages/PricingPage";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index user={user} />} />
+            <Route path="/pricing" element={<PricingPage user={user} />} />
             <Route path="/auth" element={user ? <Navigate to="/" replace /> : <AuthPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

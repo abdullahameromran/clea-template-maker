@@ -79,6 +79,7 @@ const EDGE_PROMPT_INSTRUCTIONS = `You are an invoice template designer. Generate
 - Professional, clean design`;
 const EDGE_TIMEOUT_MS = 120000;
 const EDGE_MAX_RETRIES = 2;
+const GOOGLE_AI_KEY_STORAGE_KEY = "invoicehub_google_ai_api_key";
 
 interface AITemplateStudioProps {
   user: User;
@@ -393,6 +394,7 @@ function buildPreviewVars(sampleBody?: Record<string, unknown> | null): Record<s
 
 const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) => {
   const [prompt, setPrompt] = useState("");
+  const [googleApiKey, setGoogleApiKey] = useState("");
   const [primaryColor, setPrimaryColor] = useState("#0ea5e9");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -417,9 +419,6 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
   const [previewHeight, setPreviewHeight] = useState(1120);
 
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-  const supabaseKey =
-    (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) ||
-    (import.meta.env.VITE_SUPABASE_API_KEY as string | undefined);
 
   const selectedRow = useMemo(() => rows.find((r) => r.id === selectedId) ?? null, [rows, selectedId]);
   const uiTemplates = useMemo(() => rows.map(mapDbRowToUiTemplate), [rows]);
@@ -441,6 +440,28 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
   useEffect(() => {
     setPreviewOverrides({});
   }, [draft.id, draft.html_body]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const savedKey = window.localStorage.getItem(GOOGLE_AI_KEY_STORAGE_KEY) ?? "";
+    setGoogleApiKey(savedKey);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const trimmedKey = googleApiKey.trim();
+    if (trimmedKey) {
+      window.localStorage.setItem(GOOGLE_AI_KEY_STORAGE_KEY, trimmedKey);
+    } else {
+      window.localStorage.removeItem(GOOGLE_AI_KEY_STORAGE_KEY);
+    }
+  }, [googleApiKey]);
 
   useEffect(() => {
     if (selectedId === "") {
@@ -553,7 +574,11 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
     if (!userPrompt) {
       return;
     }
-    if (!supabase || !supabaseUrl || !supabaseKey) {
+    if (!googleApiKey.trim()) {
+      setError("Enter your Google AI API key to use AI template generation.");
+      return;
+    }
+    if (!supabase || !supabaseUrl) {
       setError("Missing Supabase configuration.");
       return;
     }
@@ -566,7 +591,10 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
 
     try {
       const session = await supabase.auth.getSession();
-      const authToken = session.data.session?.access_token ?? supabaseKey;
+      const authToken = session.data.session?.access_token;
+      if (!authToken) {
+        throw new Error("You need to log in again before using AI template generation.");
+      }
 
       let response: Response | null = null;
       let parsed: AIResponse | null = null;
@@ -581,11 +609,13 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
             headers: {
               Authorization: `Bearer ${authToken}`,
               "Content-Type": "application/json",
+              "x-google-api-key": googleApiKey.trim(),
             },
             signal: controller.signal,
             body: JSON.stringify({
               use_case: `${userPrompt}\n\n${EDGE_PROMPT_INSTRUCTIONS}`,
               primary_color: primaryColor,
+              google_api_key: googleApiKey.trim(),
             }),
           });
 
@@ -699,7 +729,7 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
           </div>
           <h2 className="font-display text-4xl font-bold text-foreground mb-3">Generate Templates with AI</h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Describe your invoice style, then keep chatting to revise the same template. Save anytime to your Supabase account.
+            Paste your own Google AI Studio key, describe the invoice style you want, and keep chatting to refine the same template.
           </p>
         </div>
 
@@ -732,6 +762,22 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
             </div>
 
             <form onSubmit={runAI} className="space-y-3">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  Your Google AI API Key
+                </label>
+                <input
+                  type="password"
+                  value={googleApiKey}
+                  onChange={(e) => setGoogleApiKey(e.target.value)}
+                  placeholder="Paste your Google AI Studio key"
+                  className="w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm"
+                  autoComplete="off"
+                />
+                <p className="text-[11px] text-muted-foreground">
+                  Your key is saved only in this browser and is sent only when you generate a template.
+                </p>
+              </div>
               <div className="flex items-center gap-2">
                 <input
                   type="color"
@@ -760,11 +806,11 @@ const AITemplateStudio = ({ user, onTemplatesUpdated }: AITemplateStudioProps) =
                 className="w-full rounded-xl bg-navy text-white py-2.5 text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
               >
                 {busy ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
-                {busy ? "Generating..." : "Generate with AI (Edge Function)"}
+                {busy ? "Generating..." : "Generate with AI"}
               </button>
             </form>
             <p className="text-[11px] text-muted-foreground mt-2">
-              Uses `generate-pdf-with-ai` edge function and applies preview sample data automatically.
+              Uses your own Google AI key for this feature and applies preview sample data automatically.
             </p>
             <button
               type="button"
